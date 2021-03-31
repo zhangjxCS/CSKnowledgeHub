@@ -1,8 +1,10 @@
-## 1.Spark的前世今生
+## 基础概念
+
+### 1.Spark的前世今生
 
 Spark计算机集群是2009年由UC Berkeley AMP lab开发的一个集群计算的框架，目的是让数据分析更加快速。在大数据的场景下，数据处理的流程变慢，针对这种情况通常有两种解决办法，一个是设计出更先进的计算机，快速处理数据，另一个是利用多台计算机，协同处理数据，Spark就是采用后一种方法来提高计算速度。Spark作为一个计算引擎，本身并不储存和计算。对于一组计算机，每个计算机节点作为独立的计算资源，而Spark计算引擎确定了各个机器之间应该如何合作处理数据。
 
-## 2.Spark核心组件
+### 2.Spark核心组件
 
 ![img](https://pic3.zhimg.com/v2-c082dd3bc32544d46788453cebdc70fe_b.png)
 
@@ -14,7 +16,7 @@ Spark使用Scala语言进行实现，它是一种面向对象、函数式编程�
 - GraphX：构建于Spark上的图计算模型
 - SparkR：一个R语言包，它提供了轻量级的方式使得可以在R语言中使用 Spark
 
-## 3.Spark作业方式
+### 3.Spark作业方式
 
 ![img](https://pic4.zhimg.com/v2-73734f1009ecaa6d1c77728797789f9b_b.png)
 
@@ -32,7 +34,7 @@ Spark使用Scala语言进行实现，它是一种面向对象、函数式编程�
 
 Driver与Executor之间的关系
 
-## 4.Spark数据结构
+### 4.Spark数据结构
 
 在Spark中，数据以RDD或者DataFrame的格式储存。
 
@@ -40,7 +42,7 @@ Driver与Executor之间的关系
 
 **DataFrame：**DataFrame是一种以RDD为基础的分布式数据集，类似于传统数据库中的二维表格。在Spark1.3版本开始使用。DataFrame带有schema元信息，即DataFrame所表示的二维表数据集的每一列都带有名称和类型。这使得Spark得以洞察更多的结构信息，从而对藏于DataFrame背后的数据源以及作用于DataFrame之上的变换进行了针对性的优化，最终达到大幅提升运行时效率的目标。
 
-## 5.Spark 数据处理流程
+### 5.Spark 数据处理流程
 
 在Spark数据处理过程中，通常是将外部的数据，例如HDFS文件、Hive表导入成Spark RDD，之后通过对已有的RDD中的数据执行计算（筛选、排序、映射等）进行转换，而产生新的符合需求的RDD，并对已有的RDD中的数据执行计算产生结果，将结果返回Driver程序或写入到外部物理存储，至此实现数据的ETL（提取、转换、加载）过程。这个数据处理过程通常可以概括为以下三个步骤。
 
@@ -69,9 +71,7 @@ Spark作业根据上述的流程可以画出一个有向无环图(DAG)。Spark�
 
 ![img](https://pic3.zhimg.com/v2-0ddbb35cb65aae25dbb3eb5cbb050856_b.png)
 
-有向无环图
-
-## 6.Spark作业过程
+### 6.Spark作业过程
 
 下面我们简单总结一下Spark的作业过程
 
@@ -85,7 +85,3 @@ Spark作业根据上述的流程可以画出一个有向无环图(DAG)。Spark�
 8. Cluster Manager向Work Node发送释放资源信号
 9. Work Node对应Executor停止运行
 10. 返回运行结果
-
-## 7.总结
-
-Spark是一种针对大数据集处理的计算机集群，由Scala语言构建。用户可以通过Python, R, Scala, SQL语言对数据集进行操作。用户提交指令到Spark集群后，Spark分析指令，并构建有向无环图处理方法，接下来通过Cluster Manager和Worker的配合完成并行化的数据处理，最终输出结果，相比于普通的数据库，Spark对于大批量数据和实时数据处理具有明显优势。
