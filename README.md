@@ -2,7 +2,7 @@
 
 ## 关于本人
 
-THU天坑专业本科毕业，自学转行互联网、咨询等行业数据与算法岗位求职，关于我的更多信息可见[LinkedIn主页](https://www.linkedin.com/in/jingxiangzhang/)和[知乎主页](https://www.zhihu.com/people/zhangjx831)
+THU天坑专业本科毕业，自学转行互联网行业数据与算法岗位求职，关于我的更多信息可见[LinkedIn主页](https://www.linkedin.com/in/jingxiangzhang/)和[知乎主页](https://www.zhihu.com/people/zhangjx831)
 
 天坑专业的危害性就不多说了，知乎上劝退文一大堆。我在大四的时候决定跑路，对互联网、计算机行业比较感兴趣，所以走上了转码道路，如果你也不喜欢本专业，希望转行互联网行业求职，包括但不限于前后端、客户端、大数据、算法等岗位，那么本仓库或许对你有点帮助。我希望我的仓库能够为后来的朋友提供一点思路，尤其是传统工科转行的朋友，希望大家远离天坑，早日上岸！
 
