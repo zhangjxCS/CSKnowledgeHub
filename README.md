@@ -44,6 +44,8 @@ THU天坑专业本科毕业，自学转行互联网行业数据与算法岗位�
 
 #### 统计学习
 
+[基础概念](https://github.com/zhangjx831/Notes/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.md)
+
 [回归](https://github.com/zhangjx831/Notes/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/%E5%9B%9E%E5%BD%92.md)
 
 [分类](https://github.com/zhangjx831/Notes/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/%E5%88%86%E7%B1%BB.md)
@@ -51,6 +53,8 @@ THU天坑专业本科毕业，自学转行互联网行业数据与算法岗位�
 [聚类](https://github.com/zhangjx831/Notes/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/%E8%81%9A%E7%B1%BB.md)
 
 [降维](https://github.com/zhangjx831/Notes/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/%E9%99%8D%E7%BB%B4.md)
+
+[集成学习](https://github.com/zhangjx831/Notes/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0.md)
 
 #### 强化学习
 
