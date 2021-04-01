@@ -18,6 +18,8 @@ THU天坑专业本科毕业，自学转行互联网行业数据与算法岗位�
 
 [数据库设计](https://github.com/zhangjx831/Notes/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1.md)
 
+[SQL语言](https://github.com/zhangjx831/Notes/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%AF%AD%E8%A8%80.md)
+
 #### 大数据框架
 
 [Spark基础](https://github.com/zhangjx831/Notes/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6/Spark%E5%9F%BA%E7%A1%80.md)
