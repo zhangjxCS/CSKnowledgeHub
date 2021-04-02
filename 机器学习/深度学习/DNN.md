@@ -46,7 +46,7 @@ Leaky ReLU（带泄漏的 ReLU）：$a=max(0.01z,z)$
 
 Leaky ReLU 保证在 z < 0 的时候，梯度仍然不为 0。理论上来说，Leaky ReLU 有 ReLU 的所有优点，但在实际操作中没有证明总是好于 ReLU，因此不常用
 
-![image-20210320125820099](/Users/zhangjingxiang/Library/Application Support/typora-user-images/image-20210320125820099.png)
+![w600](http://www.ai-start.com/dl2017/images/L1_week3_9.jpg)
 
 7.为什么需要non-linear activation functions
 
@@ -100,7 +100,7 @@ $$W^{[l]} := W^{[l]} - \alpha v_{dW^{[l]}}$$
 
 $$b^{[l]} := b^{[l]} - \alpha v_{db^{[l]}}$$
 
-![image-20210320132626601](/Users/zhangjingxiang/Library/Application Support/typora-user-images/image-20210320132626601.png)
+![img](http://www.ai-start.com/dl2017/images/cc2d415b8ccda9fdaba12c575d4d3c4b.png)
 
 使用动量梯度下降时，通过累加过去的梯度值来减少抵达最小值路径上的波动，加速了收敛，因此在横轴方向下降得更快，从而得到图中红色的曲线
 
@@ -113,6 +113,8 @@ $$s_{db} = \beta s_{db} + (1 - \beta)(db)^2$$
 $$w := w - \alpha \frac{dw}{\sqrt{s_{dw} + \epsilon}}$$
 
 $$b := b - \alpha \frac{db}{\sqrt{s_{db} + \epsilon}}$$
+
+![img](http://www.ai-start.com/dl2017/images/d43cf7898bd88adff4aaac607c1bd5a1.png)
 
 Adam 优化算法（Adaptive Moment Estimation，自适应矩估计）：将 Momentum 和 RMSProp 算法结合在一起，通常有超越二者单独时的效果。
 
@@ -146,4 +148,4 @@ $$b := b - \alpha \frac{v^{corrected}_{db}}{{\sqrt{s^{corrected}_{db}} + \epsilo
 
 **鞍点（saddle）**是函数上的导数为零，但不是轴上局部极值的点。当我们建立一个神经网络时，通常梯度为零的点是下图所示的鞍点，而非局部最小值。减少损失的难度也来自误差曲面中的鞍点，而不是局部最低点。因为在一个具有高维度空间的成本函数中，如果梯度为 0，那么在每个方向，成本函数或是凸函数，或是凹函数。而所有维度均需要是凹函数的概率极小，因此在低维度的局部最优点的情况并不适用于高维度。
 
-![image-20210320134117557](/Users/zhangjingxiang/Library/Application Support/typora-user-images/image-20210320134117557.png) 
+![img](http://www.ai-start.com/dl2017/images/a8c3dfdc238762a9f0edf26e6037ee09.png)
