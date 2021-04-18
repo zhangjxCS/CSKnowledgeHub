@@ -1,6 +1,57 @@
+## Python语法
+
+Python语言中单引号和双引号没有区别，都可以表示字符串，为了跟C语言保持一致，单个字符用单引号，字符串用双引号，三引号可以表示多行字符串，在嵌入式写SQL语句时非常有用，同时三引号也可以用来实现多行注释
+
+Python语言字符串不能直接相减，这点与C语言不同，可以用ord()函数返回字符对应的ascii码值之后再相减
+
 ## Python输入输出
 
+Python中的标准输入方式有两种，一种是利用sys库，另一种是使用input()函数
 
+```python
+import sys
+# 按行读取，末尾有'\n'符号
+for line in sys.stdin:
+		print(line)
+# 按行读取，末尾有'\n'符号
+sys.stdin.readline()
+# 从标准输入中读入一行，以换行作为输入结束，也就是说raw_input()读入的东西结尾没有换行符'\n'，并且默认为字符串格式
+raw_input()
+# 读取标准输入中的一行，以换行作为输入结束，将标准输入当作一个表达式，并且计算出这个表达式的值
+input()
+```
+
+与标准输入对应，Python标准输出也有两种方式
+
+```python
+import sys
+# 标准输出，末尾无'\n'
+sys.stdout.write()
+# print()调用标准输出，并在末尾加'\n'
+print()
+```
+
+Python格式化输出有两种方法，一种是%，用于基础格式输出，另一种是format()函数，实现更复杂的功能
+
+```python
+print('%o' %20) # oct 八进制
+print('%d' %20) # dec 十进制
+print('%x' %20) # hex 十六进制
+print('.3f' % 1.11) # 保留3位小数位
+print('.3e' % 1.11) # 保留3位小数位，使用科学计数法
+print('.3g' % 1.11) # 在保证六位有效数字的前提下，使用小数方式，否则使用科学计数法
+round(1.1135,3)  # 取3位小数，由于3为奇数，则向下“舍”
+round(1.1125,3)  # 取3位小数，由于2为偶数，则向上“入”
+print('%s' % 'hello world')  # 字符串输出
+print('%20s' % 'hello world')  # 右对齐，取20位，不够则补位
+print('%-20s' % 'hello world')  # 左对齐，取20位，不够则补位
+
+print('{} {}'.format('hello','world'))  # 不带字段
+print('{0} {1}'.format('hello','world'))  # 带数字编号
+print('{0} {1} {0}'.format('hello','world'))  # 打乱顺序
+'Coordinates: {latitude}, {longitude}'.format(latitude='37.24N', longitude='-115.81W') # 通过位置匹配
+print('{:d}'.format(20)) # 十进制整数。将数字以10为基数进行输出，其他进制类似
+```
 
 ## Python函数
 
@@ -34,7 +85,7 @@ Python的方法有3种,即静态方法(staticmethod),类方法(classmethod)和�
 
 类的方法与普通的函数只有一个特别的区别——它们必须有一个额外的**第一个参数名称**, 按照惯例它的名称是 self
 
-```
+```python
 def foo(x):
     print "executing foo(%s)"%(x)
 
