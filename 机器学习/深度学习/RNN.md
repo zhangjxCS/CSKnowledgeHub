@@ -20,21 +20,17 @@ $$
 \hat y^{<t>}=g_2(W_{ya}a^{<t>}+b_y)
 $$
 
-![Recurrent-Neural-Network](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/Recurrent-Neural-Network.png)
-
 ### 反向传播
 
 单个位置上（或者说单个时间步上）某个单词的预测值的损失函数采用**交叉熵损失函数**，将单个位置上的损失函数相加，得到整个序列的成本函数
 
-![formula-of-RNN](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/formula-of-RNN.png)
+![img](http://www.ai-start.com/dl2017/images/998c7af4f90cd0de0c88f138b61f0168.png)
 
 通过RNN来预测一个序列的值通常需要两步，第一步是构建一个语言模型，第二部是通过采样来构建序列
 
 ### 语言模型
 
 建立语言模型所采用的训练集是一个大型的**语料库（Corpus）**，指数量众多的句子组成的文本。建立过程的第一步是标记化，即建立字典；然后将语料库中的每个词表示为对应的 one-hot 向量。第二步是将标志化后的训练集用于训练 RNN
-
-![language-model-RNN-example](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/language-model-RNN-example.png)
 
 ### 采样
 
@@ -67,6 +63,8 @@ $$
 a^{<t>}=c^{<t>}=\Gamma_u * \tilde c^{<t-1>}+(1-\Gamma_u)*c^{<t-1>}
 $$
 
+![img](http://www.ai-start.com/dl2017/images/c1df3f793dcb1ec681db6757b4974cee.png)
+
 ### LSTM
 
 相比于GRU，LSTM新引入了遗忘门$\Gamma_f$和输出门$\Gamma_o$，去掉了相关门$\Gamma_r$
@@ -94,25 +92,20 @@ $$
 a^{<t>}=\Gamma_o*tanh(c^{<t>})
 $$
 
+![ST](http://www.ai-start.com/dl2017/images/LSTM.png)
+
 ### BRNN双向循环神经网络
 
 **双向循环神经网络（Bidirectional RNN，BRNN）**可以在序列的任意位置使用之前和之后的数据。**缺点**是需要完整的序列数据，才能预测任意位置的结果。
 
-![BRNN](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/BRNN.png)
+![img](http://www.ai-start.com/dl2017/images/053831ff43d039bd5e734df96d8794cb.png)
 
 ### DRNN深度循环神经网络
 
 循环神经网络的每个时间步上也可以包含多个隐藏层
 
-![DRNN](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/DRNN.png)
+![img](http://www.ai-start.com/dl2017/images/455863a3c8c2dfaa0e5474bfa2c6824d.png)
 
 ## word2vec
 
-
-
-
-
-
-
-
-
+![image-20210419162921542](/Users/didi/Library/Application Support/typora-user-images/image-20210419162921542.png)
