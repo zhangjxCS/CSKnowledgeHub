@@ -20,21 +20,17 @@ $$
 \hat y^{<t>}=g_2(W_{ya}a^{<t>}+b_y)
 $$
 
-![Recurrent-Neural-Network](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/Recurrent-Neural-Network.png)
-
 ### 反向传播
 
 单个位置上（或者说单个时间步上）某个单词的预测值的损失函数采用**交叉熵损失函数**，将单个位置上的损失函数相加，得到整个序列的成本函数
 
-![formula-of-RNN](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/formula-of-RNN.png)
+![img](http://www.ai-start.com/dl2017/images/998c7af4f90cd0de0c88f138b61f0168.png)
 
 通过RNN来预测一个序列的值通常需要两步，第一步是构建一个语言模型，第二部是通过采样来构建序列
 
 ### 语言模型
 
 建立语言模型所采用的训练集是一个大型的**语料库（Corpus）**，指数量众多的句子组成的文本。建立过程的第一步是标记化，即建立字典；然后将语料库中的每个词表示为对应的 one-hot 向量。第二步是将标志化后的训练集用于训练 RNN
-
-![language-model-RNN-example](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/language-model-RNN-example.png)
 
 ### 采样
 
@@ -67,6 +63,8 @@ $$
 a^{<t>}=c^{<t>}=\Gamma_u * \tilde c^{<t-1>}+(1-\Gamma_u)*c^{<t-1>}
 $$
 
+![img](http://www.ai-start.com/dl2017/images/c1df3f793dcb1ec681db6757b4974cee.png)
+
 ### LSTM
 
 相比于GRU，LSTM新引入了遗忘门$\Gamma_f$和输出门$\Gamma_o$，去掉了相关门$\Gamma_r$
@@ -94,25 +92,31 @@ $$
 a^{<t>}=\Gamma_o*tanh(c^{<t>})
 $$
 
+![ST](http://www.ai-start.com/dl2017/images/LSTM.png)
+
 ### BRNN双向循环神经网络
 
 **双向循环神经网络（Bidirectional RNN，BRNN）**可以在序列的任意位置使用之前和之后的数据。**缺点**是需要完整的序列数据，才能预测任意位置的结果。
 
-![BRNN](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/BRNN.png)
+![img](http://www.ai-start.com/dl2017/images/053831ff43d039bd5e734df96d8794cb.png)
 
 ### DRNN深度循环神经网络
 
 循环神经网络的每个时间步上也可以包含多个隐藏层
 
-![DRNN](https://raw.githubusercontent.com/bighuang624/Andrew-Ng-Deep-Learning-notes/master/docs/Sequence_Models/DRNN.png)
+![img](http://www.ai-start.com/dl2017/images/455863a3c8c2dfaa0e5474bfa2c6824d.png)
 
-## word2vec
+## 词嵌入
 
+**词嵌入**是 NLP 中语言模型与表征学习技术的统称，概念上而言，它是指把一个维数为所有词的数量的高维空间（one-hot 形式表示的词）“嵌入”到一个维数低得多的连续向量空间中，每个单词或词组被映射为实数域上的向量。对大量词汇进行词嵌入后获得的词向量，可用于完成命名实体识别等任务。
 
+![img](http://www.ai-start.com/dl2017/images/ce30c9ae7912bdb3562199bf85eca1cd.png)
 
+用词嵌入做迁移学习可以降低学习成本，提高效率。其步骤如下：
 
+1. 从大量的文本集中学习词嵌入，或者下载网上开源的、预训练好的词嵌入模型；
+2. 将这些词嵌入模型迁移到新的、只有少量标注训练集的任务中；
+3. 可以选择是否微调词嵌入。当标记数据集不是很大时可以省下这一步。
 
-
-
-
+### word2vec
 
