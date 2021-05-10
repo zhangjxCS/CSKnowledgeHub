@@ -50,3 +50,46 @@ $$
 **平均池化（Average Pooling）**：从取某个区域的最大值改为求这个区域的平均值
 
 ![img](http://www.ai-start.com/dl2017/images/ac42ede86634922acf4d34b12025b34f.png)
+
+## 经典模型
+
+### LeNet
+
+- LeNet-5 针对灰度图像而训练，因此输入图片的通道数为 1。
+- 该模型总共包含了约 6 万个参数，远少于标准神经网络所需。
+- 典型的 LeNet-5 结构包含卷积层（CONV layer），池化层（POOL layer）和全连接层（FC layer），排列顺序一般为 CONV layer->POOL layer->CONV layer->POOL layer->FC layer->FC layer->OUTPUT layer。一个或多个卷积层后面跟着一个池化层的模式至今仍十分常用。
+- 当 LeNet-5模型被提出时，其池化层使用的是平均池化，而且各层激活函数一般选用 Sigmoid 和 tanh。现在，我们可以根据需要，做出改进，使用最大池化并选用 ReLU 作为激活函数。
+
+![img](http://www.ai-start.com/dl2017/images/a3931d10222ebaf43490935d391eeceb.png)
+
+### AlexNet
+
+- AlexNet 模型与 LeNet-5 模型类似，但是更复杂，包含约 6000 万个参数。另外，AlexNet 模型使用了 ReLU 函数。
+- 当用于训练图像和数据集时，AlexNet 能够处理非常相似的基本构造模块，这些模块往往包含大量的隐藏单元或数据。
+
+![img](http://www.ai-start.com/dl2017/images/6a9d80274dc6315d9d8c0c27b81548b4.png)
+
+### VGG-16
+
+- VGG 又称 VGG-16 网络，“16”指网络中包含 16 个卷积层和全连接层。
+- 超参数较少，只需要专注于构建卷积层。
+- 结构不复杂且规整，在每一组卷积层进行滤波器翻倍操作。
+- VGG 需要训练的特征数量巨大，包含多达约 1.38 亿个参数。
+
+![img](http://www.ai-start.com/dl2017/images/4a5b3f4c8b34eb8cdca6c36b46af142d.png)
+
+### ResNets
+
+在理论上，随着网络深度的增加，性能应该越来越好。但实际上，对于一个普通网络，随着神经网络层数增加，训练错误会先减少，然后开始增多。但残差网络的训练效果显示，即使网络再深，其在训练集上的表现也会越来越好。
+
+对于残差网络来说，加入了跳跃连接部分，发生梯度消失时，额外的残差块不会降低网络性能。而如果没有发生梯度消失时，训练得到的非线性关系会使得表现效果进一步提高。
+
+
+
+![img](http://www.ai-start.com/dl2017/images/131e538bb527859430280becd65b049b.png)
+
+### Inception
+
+在之前的卷积网络中，我们只能选择单一尺寸和类型的滤波器。而 **Inception 网络的作用**即是代替人工来确定卷积层中的滤波器尺寸与类型，或者确定是否需要创建卷积层或池化层
+
+![img](http://www.ai-start.com/dl2017/images/99f8fc7dbe7cd0726f5271aae11b9872.png)
