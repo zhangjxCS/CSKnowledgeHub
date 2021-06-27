@@ -69,6 +69,20 @@ print('{0} {1} {0}'.format('hello','world'))  # 打乱顺序
 print('{:d}'.format(20)) # 十进制整数。将数字以10为基数进行输出，其他进制类似
 ```
 
+### 常用语法糖
+
+列表表达式：[my_func(i) for i in range(5)]
+
+条件赋值：value = a if condition else b
+
+匿名函数：lambda x: my_func(x)
+
+map方法：使用某个函数，对可迭代对象进行处理map(lambda x: 2*x, range(5))
+
+zip方法：把多个可迭代对象打包成一个元组构成的可迭代对象zip(range(1,5), range(2,6))，常用于循环迭代和建立字典，使用*操作符可以对zip方法作用后的元组列表进行解压
+
+enumerate方法：for index, value in enumerate(list)
+
 ## Python函数
 
 1.函数参数引用
