@@ -20,6 +20,20 @@ deepcopy使用场景：列表或字典，且内部元素包含列表或字典
 
 不可变对象：包括int，float，long，str，tuple等。更改变量时，创建一个新值，把变量绑定到新值上，而旧值如果没有被引用就等待垃圾回收。
 
+### 常用语法糖
+
+列表表达式：`[my_func(i) for i in range(5)]`
+
+条件赋值：`value = a if condition else b`
+
+匿名函数：`lambda x: my_func(x)`
+
+map方法：使用某个函数，对可迭代对象进行处理`map(lambda x: 2*x, range(5))`
+
+zip方法：把多个可迭代对象打包成一个元组构成的可迭代对象`zip(range(1,5), range(2,6))`，常用于循环迭代和建立字典，使用*操作符可以对zip方法作用后的元组列表进行解压
+
+enumerate方法：`for index, value in enumerate(list)`
+
 ## Python输入输出
 
 Python中的标准输入方式有两种，一种是利用sys库，另一种是使用input()函数
@@ -68,20 +82,6 @@ print('{0} {1} {0}'.format('hello','world'))  # 打乱顺序
 'Coordinates: {latitude}, {longitude}'.format(latitude='37.24N', longitude='-115.81W') # 通过位置匹配
 print('{:d}'.format(20)) # 十进制整数。将数字以10为基数进行输出，其他进制类似
 ```
-
-### 常用语法糖
-
-列表表达式：[my_func(i) for i in range(5)]
-
-条件赋值：value = a if condition else b
-
-匿名函数：lambda x: my_func(x)
-
-map方法：使用某个函数，对可迭代对象进行处理map(lambda x: 2*x, range(5))
-
-zip方法：把多个可迭代对象打包成一个元组构成的可迭代对象zip(range(1,5), range(2,6))，常用于循环迭代和建立字典，使用*操作符可以对zip方法作用后的元组列表进行解压
-
-enumerate方法：for index, value in enumerate(list)
 
 ## Python函数
 
@@ -133,4 +133,66 @@ a=A()
 ```
 
 ## Numpy科学计算
+
+### 构造np数组
+
+等差数列：`np.linespace(1,5,11)# 最后一个值代表样本数目`，`np.arange(1,5,2)# 最后一个值代表步长`
+
+特殊矩阵：`np.zeros((2,3))# 零矩阵`，`np.eye(3) # 单位矩阵`，`np.full((2,3),10)# 维度为2*3，元素全为10的矩阵`
+
+随机矩阵：`np.random.rand(3)# 生成3个0-1均匀分布随机数`，`np.random.uniform(5, 15, 3)# 生成3个5-15均匀分布随机数`，`np.random.randn(2,2)# 生成2*2维度标准正态分布矩阵`，`np.random.normal(3,2.5,3)# 生成均值3，标准差2.5的正态分布`，`np.random.randint(low, high, size)# 生成随机整数`，`np.random.choice(my_list, (3,3))# 从my_list中有放回随机采样`，`np.random.permutation(my_list)# 随机打乱列表`
+
+### np数组变形
+
+转置：`A.T`
+
+合并：`np.r_[A,B] # A与B上下合并`，`np.c_[A,B] # A与B左右合并`
+
+维度变换：`A.reshape(3,2)`，`A.reshape(-1,1)# -1代表维度空缺，由python自行决定维度`
+
+### np数组索引切片
+
+`A[:-1, [0,2]] # 传入列表指定维度的索引切片`
+
+### 常用函数
+
+`np.where(a>0,a,0)# 条件为True填充a，否则填充0`
+
+`np.nonzero(a) # 返回非零值的索引`
+
+`a.argmax() # 求最大值索引`
+
+`a.argmin() # 求最小值索引`
+
+`(a>b).any() # 序列至少一个True时返回True`
+
+`(a>b).all() # 序列全为True时返回True`
+
+统计函数：max, min, mean, median, std, var, sum, quantile(全局方法，通过np.quantile调用)
+
+### 矩阵运算
+
+`np.dot(A, B) # 矩阵A与B相乘`
+
+`np.linalg.norm # 向量范数与矩阵范数`
+
+`A@B # 矩阵乘法`
+
+## Pandas数据处理
+
+### 文件读写
+
+`pd.read_csv('data.csv', header=None, sep=',', nrows=10, usecols=['col1', 'col2'])# 指定行数、列名、分隔符读取`
+
+`df.to_csv('data.csv', index=False)`
+
+### 常用函数
+
+汇总函数：head tail info describe
+
+统计函数：sum mean median var std max min quantile count idxmax
+
+唯一值函数：unique nunique value_counts drop_duplicates
+
+
 
