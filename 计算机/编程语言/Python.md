@@ -184,15 +184,37 @@ a=A()
 
 `pd.read_csv('data.csv', header=None, sep=',', nrows=10, usecols=['col1', 'col2'])# 指定行数、列名、分隔符读取`
 
-`df.to_csv('data.csv', index=False)`
+`df.to_csv('data.csv', sep='\t', index=False)# 指定分隔符，不输出列标`
+
+### 数据结构
+
+Series构造：`s = pd.Series(data=['a', 'b'], index=pd.Index([1, 2], name='my_index'))`
+
+获取Series信息：`s.values`, `s.index`, `s.dtype`, `s.name`, `s.shape`
+
+DataFrame构造：`df = pd.DataFrame(data={'col1':[1, 2, 3], 'col2':['a', 'b', 'c']})`
+
+获取DataFrame信息：`df.values`, `df.index`, `df.columns`, `df.dtypes`, `df.shape`
 
 ### 常用函数
 
-汇总函数：head tail info describe
+汇总函数：`df.head()`, `df.tail()` `df.info()`, `df.describe()`
 
-统计函数：sum mean median var std max min quantile count idxmax
+统计函数：`df.sum()`, `df.mean()`, `df.median()`, `df.var()`, `df.std()`, `df.max()`, `df.min()`, `df.quantile(0.8)`, `df.count()` 
 
-唯一值函数：unique nunique value_counts drop_duplicates
+唯一值函数：`df['item'].unique()`, `df['item'].nunique()`, `df['item'].value_counts()`, `df.drop_duplicates(['item', 'date'], keep='first')`, `df['item'].duplicated() # 返回是否为唯一值的列表`
 
+替换函数：`df['gender'].replace({'female':0, 'male':1})`, `s.where(s<0)# 替换False行`, `s.mask(s<0) #替换True的行`
 
+排序函数：`df.sort_values('gender')`, `df.sort_index(level=['Name'])`
+
+自定义函数：`df.apply(lambda x: x.mean())`
+
+### 窗口对象
+
+rolling对象：构建滑动窗口`df.rolling(window=3)`
+
+shift偏移对象：`df.shift(2)`
+
+diff对象：`df.diff(3)`
 
