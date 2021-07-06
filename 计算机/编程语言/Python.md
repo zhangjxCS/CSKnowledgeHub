@@ -138,7 +138,7 @@ a=A()
 
 等差数列：`np.linespace(1,5,11)# 最后一个值代表样本数目`，`np.arange(1,5,2)# 最后一个值代表步长`
 
-特殊矩阵：`np.zeros((2,3))# 零矩阵`，`np.eye(3) # 单位矩阵`，`np.full((2,3),10)# 维度为2*3，元素全为10的矩阵`
+特殊矩阵：`np.zeros((2,3))# 零矩阵`，`np.eye(3)# 单位矩阵`，`np.full((2,3),10)# 维度为2*3，元素全为10的矩阵`
 
 随机矩阵：`np.random.rand(3)# 生成3个0-1均匀分布随机数`，`np.random.uniform(5, 15, 3)# 生成3个5-15均匀分布随机数`，`np.random.randn(2,2)# 生成2*2维度标准正态分布矩阵`，`np.random.normal(3,2.5,3)# 生成均值3，标准差2.5的正态分布`，`np.random.randint(low, high, size)# 生成随机整数`，`np.random.choice(my_list, (3,3))# 从my_list中有放回随机采样`，`np.random.permutation(my_list)# 随机打乱列表`
 
@@ -217,4 +217,42 @@ rolling对象：构建滑动窗口`df.rolling(window=3)`
 shift偏移对象：`df.shift(2)`
 
 diff对象：`df.diff(3)`
+
+### 索引
+
+列索引：`df[['name', 'gender']]`
+
+行索引：`df['San Zhang']`
+
+loc索引：`df.set_index('name'); df['San Zhang', 'gender']# 两个位置，第一个位置筛选行，第二个位置筛选列`, `df[df.weight > 70, 'name']# 根据条件筛选行`, `df.loc[condition] # 根据条件筛选行`
+
+使用索引对原dataframe赋值时，仅使用一层索引，否则将赋值在临时返回的copy副本上
+
+iloc索引：`df.iloc[1, 1] # 筛选第二行和第二列`
+
+query方法：`df.query('(name == 'San Zhang') and (grade == 100')) # 通过列名与条件筛选`
+
+随机抽样：`df.sample(frac=0.5, replace=True, weights=df.value) # 按照df.value的权重有放回抽样`
+
+多级索引：多级索引可以表示成元组的形式`df.index.names #行索引名`, `df.index.values # 行索引值`, `df.columns.names # 列索引名`, `df.columns.values # 列索引值`, `df.sort_index() # 多多级索引进行排序，排序后可进行切片操作`
+
+### 分组
+
+格式：`df.groupby(分组依据)[数据来源].使用操作`
+
+groupby对象： `gb.ngroups # 对象有多少个组`, `gb.groups # 对象组的具体信息`, `gb.size() # 组内属性数据行数`
+
+聚合函数：mean max min sum等聚合函数
+
+agg方法：对不同的列使用不同的函数，可自定义函数，自定义函数名
+
+`gb.agg(['sum', 'idxmax', 'skew']) # 使用多个聚合函数`, `gb.agg({'Height':['mean', 'max'], 'Weight':'count}) # 对特定的列使用特定的聚合函数`, `gb.agg([('my_sum', 'sum')]) # 给方法重命名` 
+
+transform方法：对同一列数据做变换，返回与原序列长度相同的序列，也可以返回一个标量并广播到这个组
+
+`gb.transform(lambda x: (x-x.mean())/x.std())`
+
+filter方法：对组进行筛选，组的所有行满足条件会被保留，否则该组被过滤
+
+`gb.filter(lambda x: x.shape[0]>100)`
 
