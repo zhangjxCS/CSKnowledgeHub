@@ -256,3 +256,29 @@ filter方法：对组进行筛选，组的所有行满足条件会被保留，�
 
 `gb.filter(lambda x: x.shape[0]>100)`
 
+### 变形
+
+长表变宽表：`df.pivot(index='Name', columns='Subject', values='Grade') # index与column比须确定一个value，否则不能变换`
+
+聚合变换：`df.pivot_table(index='Name', columns='Subject', values='Grade', aggfunc='mean')`
+
+逆操作：`df.melt(id_vars='Name', value_vars=['Chinese', 'Math'], var_name='Subject', value_name='Grade') # pivot的逆操作`
+
+### 连接
+
+值连接：`df1.merge(df2, on='Name', how='left')`
+
+索引连接：`df1.join(df2, how='left', lsuffix='_1', rsuffix='_2')`
+
+方向连接：`pd.concat([df1, df2], axis=1, join='outer') # 0表示按纵轴合并，根据列索引对齐；1表示按横轴合并，根据行索引对齐。outer表示合并两个表所有，未出现的填补nan`
+
+### 缺失数据
+
+查看缺失信息：`df.isna()`, `df.isnull()`
+
+删除：`df.dropna(how = 'any', subset = ['Height', 'Weight'])`, `df.dropna(1, thresh=df.shape[0]-15) # 删除超过15哥缺失值的列`
+
+填充：`s.fillna(method='ffill') # 用前面的值向后填充`, `s.fillna({'a': 100, 'd': 200}) # 通过索引映射填充的值`, `s.fillna(s.mean())`
+
+
+
