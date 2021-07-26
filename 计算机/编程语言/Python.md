@@ -280,72 +280,9 @@ filter方法：对组进行筛选，组的所有行满足条件会被保留，�
 
 填充：`s.fillna(method='ffill') # 用前面的值向后填充`, `s.fillna({'a': 100, 'd': 200}) # 通过索引映射填充的值`, `s.fillna(s.mean())`
 
-<<<<<<< HEAD
-## 排序算法
-
-### 归并排序
-
-```python
-class Solution:
-    def sortArray(self, nums: List[int]) -> List[int]:
-        if len(nums) <= 1:
-            return nums
-        mi = len(nums)//2
-        left = self.sortArray(nums[:mi])
-        right = self.sortArray(nums[mi:])
-        return self.merge(left, right)
-    
-    def merge(self, left, right):
-        newnum = []
-        i, j = 0, 0
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-                newnum.append(left[i])
-                i += 1
-            else:
-                newnum.append(right[j])
-                j += 1
-        if i < len(left):
-            while i < len(left):
-                newnum.append(left[i])
-                i += 1
-        if j < len(right):
-            while j < len(right):
-                newnum.append(right[j])
-                j += 1
-        return newnum
-```
-
-### 快速排序
-
-```python
-# 不包含重复元素
-class Solution:
-    def sortArray(self, nums: List[int]) -> List[int]:
-        self.quicksort(nums, 0, len(nums)-1)
-        return nums
-        
-    def quicksort(self, nums, lo, hi):
-        if lo >= hi:
-            return
-        pivot = nums[lo]
-        i, j = lo + 1, hi
-        while i <= j:
-            while i <= j and nums[i] <= pivot:
-                i += 1
-            while i <= j and nums[j] >= pivot:
-                j -= 1
-            if i < j:
-                nums[i], nums[j] = nums[j], nums[i]
-        nums[j], nums[lo] = nums[lo], nums[j]
-        self.quicksort(nums, lo, j-1)
-        self.quicksort(nums, j+1, hi)
-```
-=======
 ### 文本数据
 
 str对象：`str` 对象是定义在 `Index` 或 `Series` 上的属性，专门用于处理每个元素的文本内容，其内部定义了大量方法，因此对一个序列进行文本处理，首先需要获取其 `str` 对象。
->>>>>>> 1898a5dab62a6853e5341e9268d8920d93573436
 
 string类型：str对象按照object存储，string类型表示字符串
 
