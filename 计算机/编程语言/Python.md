@@ -34,6 +34,25 @@ zip方法：把多个可迭代对象打包成一个元组构成的可迭代对�
 
 enumerate方法：`for index, value in enumerate(list)`
 
+### 装饰器decorator
+
+```python
+def a_new_decorator(a_func):
+    def wrapTheFunction():
+        print("I am doing some boring work before executing a_func()")
+        a_func()
+        print("I am doing some boring work after executing a_func()")
+    return wrapTheFunction
+# traditional way
+def test():
+  	print('test')
+test = a_new_decorator(test)
+# new way
+@a_new_decorator
+def test():
+  	print('test')
+```
+
 ## Python输入输出
 
 Python中的标准输入方式有两种，一种是利用sys库，另一种是使用input()函数

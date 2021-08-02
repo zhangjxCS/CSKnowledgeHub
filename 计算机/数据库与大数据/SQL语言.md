@@ -29,17 +29,17 @@ MySQL 使用了嵌套循环（Nested-Loop Join）的实现方式。Nested-Loop J
 
 1.SNLJ，简单嵌套循环。这是最简单的方案，性能也一般。实际上就是通过驱动表的结果集作为循环基础数据，然后一条一条的通过该结果集中的数据作为过滤条件到下一个表中查询数据，然后合并结果。如果还有第三个参与 Join，则再通过前两个表的 Join 结果集作为循环基础数据，再一次通过循环查询条件到第三个表中查询数据，如此往复。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvaufKISYMVA6xk1p9XpneMNjQfBpDaMUiadkYynibYCats5l27FC4nn8PQBGM52td3MCqb1xnokvJsoQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://i.loli.net/2021/08/02/NSWlnXAhtHIkYjL.jpg)
 
 这个算法相对来说就是很简单了，从驱动表中取出 R1 匹配 S 表所有列，然后 R2，R3,直到将 R 表中的所有数据匹配完，然后合并数据，可以看到这种算法要对 S 表进行 RN 次访问，虽然简单，但是相对来说开销还是太大了
 
 2.INLJ，索引嵌套循环。索引嵌套联系由于非驱动表上有索引，所以比较的时候不再需要一条条记录进行比较，而可以通过索引来减少比较，从而加速查询。这也就是平时我们在做关联查询的时候必须要求关联字段有索引的一个主要原因。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvaufKISYMVA6xk1p9XpneMNjIoXSJee6o9WBibHQrkvsyHtOkSM9VXf9xZmjxiawJgEnPEr3aicFRHWTQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://i.loli.net/2021/08/02/m94qDEu8AtnCF7Y.jpg)
 
 3.BNLJ，块嵌套循环。如果 join 字段没索引，被驱动表需要进行扫描。这里 MySQL 并不会简单粗暴的应用前面算法，而是加入了 buffer 缓冲区，降低了内循环的个数，也就是被驱动表的扫描次数。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvaufKISYMVA6xk1p9XpneMNjutXPdYZukU6K4R14OHCLU5cTPp15DcaxJ86DINdddhvIBceAzgn6Vw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://i.loli.net/2021/08/02/zScDHul4QnTqmbZ.jpg)
 
 这个 buffer 被称为 join buffer，顾名思义，就是用来缓存 join 需要的字段。MySQL 默认 buffer 大小 256K，如果有 n 个 join 操作，会生成 n-1 个 join buffer。
 

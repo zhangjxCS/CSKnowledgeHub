@@ -6,7 +6,7 @@ Spark计算机集群是2009年由UC Berkeley AMP lab开发的一个集群计算�
 
 ### 2.Spark核心组件
 
-![img](https://pic3.zhimg.com/v2-c082dd3bc32544d46788453cebdc70fe_b.png)
+![img](https://i.loli.net/2021/08/02/VmcRhzWv913uxSN.png)
 
 Spark使用Scala语言进行实现，它是一种面向对象、函数式编程语言，能够像操作本地集合对象一样轻松地操作分布式数据集。Spark接受的语法有SQL, Python, Scala, Java, R，读入的数据格式可以是JSON、CSV、HDFS（Hadoop分布式文件）、MySQL数据表等等。Spark引擎主要由下述的五个部分组成。
 
@@ -18,7 +18,7 @@ Spark使用Scala语言进行实现，它是一种面向对象、函数式编程�
 
 ### 3.Spark作业方式
 
-![img](https://pic4.zhimg.com/v2-73734f1009ecaa6d1c77728797789f9b_b.png)
+![img](https://i.loli.net/2021/08/02/oadn7ve8KiVLWHU.png)
 
 我们使用spark-submit提交一个Spark作业之后，这个作业就会启动一个对应的Driver进程。根据你使用的部署模式（deploy-mode）不同，Driver进程可能在本地启动，也可能在集群中某个工作节点上启动。Driver进程本身会根据我们设置的参数，占有一定数量的内存和CPU core。而Driver进程要做的第一件事情，就是向集群管理器Cluster Manager（可以是Spark Standalone集群，也可以是其他的资源管理集群，常用的集群管理器还有Yarn Mesos等等）申请运行Spark作业需要使用的资源，这里的资源指的就是Executor进程。YARN集群管理器会根据我们为Spark作业设置的资源参数，在各个工作节点上，启动一定数量的Executor进程，每个Executor进程都占有一定数量的内存和CPU core。
 
@@ -30,7 +30,7 @@ Spark使用Scala语言进行实现，它是一种面向对象、函数式编程�
 - **Driver：** 一个Spark作业运行时包括一个Driver进程，也是作业的主进程，负责作业的解析、生成Stage并调度Task到Executor上。包括DAGScheduler，TaskScheduler。
 - **Executor：**即真正执行作业的地方，一个集群一般包含多个Executor，每个Executor接收Driver的命令Launch Task，一个Executor可以执行一到多个Task。
 
-![img](https://pic3.zhimg.com/v2-19e4098433ba55e57c73cfa2881206a2_b.png)
+![img](https://i.loli.net/2021/08/02/yF9sJx8pmoM71i6.png)
 
 Driver与Executor之间的关系
 
@@ -55,7 +55,7 @@ Driver与Executor之间的关系
 - **Partition（分区）：**一个RDD在物理上被切分为多个Partition，即数据分区，这些Partition可以分布在不同的节点上。Partition是Spark计算任务的基本处理单位，决定了并行计算的粒度，而Partition中的每一条Record为基本处理对象。例如对某个RDD进行map操作，在具体执行时是由多个并行的Task对各自分区的每一条记录进行map映射。
 - **Dependency（依赖）：**对RDD的Transformation或Action操作，让RDD产生了父子依赖关系（事实上，Transformation或Action操作生成的中间RDD也存在依赖关系），这种依赖分为宽依赖和窄依赖两种
 
-![img](https://pic2.zhimg.com/v2-f63fcdb5b1a53135bd507738b0b4cbc5_b.png)
+![img](https://i.loli.net/2021/08/02/a5qXsKDOPIgpF1h.png)
 
 Spark宽依赖与窄依赖
 
@@ -69,7 +69,7 @@ Spark是根据shuffle类算子来进行stage的划分。如果我们的代码中
 
 Spark作业根据上述的流程可以画出一个有向无环图(DAG)。Spark根据用户Application中的RDD的转换和行动，生成RDD之间的依赖关系，RDD之间的计算链构成了RDD的血统（Lineage），同时也生成了逻辑上的DAG（有向无环图）。每一个RDD都可以根据其依赖关系一级一级向前回溯重新计算，这便是Spark实现容错的一种手段
 
-![img](https://pic3.zhimg.com/v2-0ddbb35cb65aae25dbb3eb5cbb050856_b.png)
+![img](https://i.loli.net/2021/08/02/wWIsqjUQM5Vl2YB.png)
 
 ### 6.Spark作业过程
 
@@ -100,7 +100,7 @@ cache()方法表示：使用非序列化的方式将RDD中的数据全部尝试�
 
 persist()方法表示：手动选择持久化级别，并使用指定的方式进行持久化。在持久化过程中，按照内存是否溢出依次尝试MEMORY_ONLY, MEMORY_ONLY_SER, MEMORY_AND_DISK_SER
 
-![img](https://pic3.zhimg.com/v2-1599a76d45d6e4542154f6e5454566ea_b.png)
+![img](https://i.loli.net/2021/08/02/8NwoZneIlJQkG1Y.png)
 
 持久化级别分类
 
