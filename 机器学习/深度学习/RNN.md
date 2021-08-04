@@ -24,7 +24,7 @@ $$
 
 单个位置上（或者说单个时间步上）某个单词的预测值的损失函数采用**交叉熵损失函数**，将单个位置上的损失函数相加，得到整个序列的成本函数
 
-![img](http://www.ai-start.com/dl2017/images/998c7af4f90cd0de0c88f138b61f0168.png)
+![img](https://i.loli.net/2021/08/04/VMPcZnrig6opvI1.png)
 
 通过RNN来预测一个序列的值通常需要两步，第一步是构建一个语言模型，第二部是通过采样来构建序列
 
@@ -63,7 +63,7 @@ $$
 a^{<t>}=c^{<t>}=\Gamma_u * \tilde c^{<t-1>}+(1-\Gamma_u)*c^{<t-1>}
 $$
 
-![img](http://www.ai-start.com/dl2017/images/c1df3f793dcb1ec681db6757b4974cee.png)
+![img](https://i.loli.net/2021/08/04/cDJTWHUgOPkS2ua.png)
 
 ### LSTM
 
@@ -92,19 +92,19 @@ $$
 a^{<t>}=\Gamma_o*tanh(c^{<t>})
 $$
 
-![ST](http://www.ai-start.com/dl2017/images/LSTM.png)
+![ST](https://i.loli.net/2021/08/04/3atNUyejpIVchEF.png)
 
 ### BRNN双向循环神经网络
 
 **双向循环神经网络（Bidirectional RNN，BRNN）**可以在序列的任意位置使用之前和之后的数据。**缺点**是需要完整的序列数据，才能预测任意位置的结果。
 
-![img](http://www.ai-start.com/dl2017/images/053831ff43d039bd5e734df96d8794cb.png)
+![img](https://i.loli.net/2021/08/04/lQj8AhFHwJYkEoV.png)
 
 ### DRNN深度循环神经网络
 
 循环神经网络的每个时间步上也可以包含多个隐藏层
 
-![img](http://www.ai-start.com/dl2017/images/455863a3c8c2dfaa0e5474bfa2c6824d.png)
+![img](https://i.loli.net/2021/08/04/NHiFXYjkBSVM49L.png)
 
 ## 词嵌入
 
@@ -114,7 +114,7 @@ $$
 
 **词嵌入**是 NLP 中语言模型与表征学习技术的统称，概念上而言，它是指把一个维数为所有词的数量的高维空间（one-hot 形式表示的词）“嵌入”到一个维数低得多的连续向量空间中，每个单词或词组被映射为实数域上的向量。
 
-![img](http://www.ai-start.com/dl2017/images/ce30c9ae7912bdb3562199bf85eca1cd.png)
+![img](https://i.loli.net/2021/08/04/Bp8QcoewPVYhF9C.png)
 
 用词嵌入做迁移学习可以降低学习成本，提高效率。其步骤如下：
 
@@ -128,7 +128,7 @@ $$
 
 ### word2vec
 
-![img](https://pic4.zhimg.com/80/v2-a1a73c063b32036429fbd8f1ef59034b_1440w.jpg)
+![img](https://i.loli.net/2021/08/04/CbJ2PA1qd4skVv9.png)
 
 word2vec的目标是通过一个语料库来学习词嵌入矩阵，通常有两种Skip-gram和CBOW两种方法。word2vec模型背后的基本思想是对出现在上下文环境里的词进行预测。对于每一条输入文本，我们选取一个上下文窗口和一个中心词，并基于这个中心词去预测窗口里其他词出现的概率。因此，word2vec模型可以方便地从新增语料中学习到新增词的向量表达，是一种高效的在线学习算法
 
@@ -138,13 +138,13 @@ word2vec的目标是通过一个语料库来学习词嵌入矩阵，通常有两
 
 从左到右是 One-hot 向量，乘以 center word 的矩阵 W 于是找到词向量，乘以另一个 context word 的矩阵 W′ 得到对每个词语的“相似度”，对相似度取 Softmax 得到概率，与答案对比计算损失
 
-<img src="https://pic1.zhimg.com/80/v2-ca81e19caa378cee6d4ba6d867f4fc7c_1440w.jpg" alt="img" style="zoom:60%;" />
+<img src="https://i.loli.net/2021/08/04/SGHnm1TwRgBVNyF.png" alt="img" style="zoom:60%;" />
 
 • CBOW：根据上下文预测目标词
 
 CBOW与Skip-gram相反，使用上下文的词来预测目标词，对输出相似度取 Softmax 得到概率，并计算loss
 
-<img src="https://pic3.zhimg.com/80/v2-d1ca2547dfb91bf6a26c60782a26aa02_1440w.jpg" alt="img" style="zoom:20%;" />
+<img src="https://i.loli.net/2021/08/04/nvJEei4abws3Rkr.jpg" alt="img" style="zoom:20%;" />
 
 由于在OneHot向量的纬度可能很大，使用Softmax输出结果是要计算所有指数项的和，使用分层softmax和负采样的技术可以加速
 
@@ -156,7 +156,7 @@ CBOW与Skip-gram相反，使用上下文的词来预测目标词，对输出相�
 
 生成数据的方式是我们选择一个上下文词，再选一个目标词，这就是正样本，给定标签为1；然后我们将用相同的上下文词，再从字典中选取随机的词，并标记0，这些就会成为负样本
 
-![img](http://www.ai-start.com/dl2017/images/54beb302688f6a298b63178534281575.png)
+![img](https://i.loli.net/2021/08/04/5SEPxn9AGVq2J3w.png)
 
 ### 情感分类
 
@@ -164,17 +164,17 @@ CBOW与Skip-gram相反，使用上下文的词来预测目标词，对输出相�
 
 使用 RNN 能够实现一个效果更好的情感分类器，相比于普通的基于平均值的情感分类器，RNN的情感分类器考虑了单词时序
 
-![img](http://www.ai-start.com/dl2017/images/de4b6513a8d1866bccf1fac3c0d0d6d2.png)
+![img](https://i.loli.net/2021/08/04/FAwhLygaZbrdlq1.png)
 
 ## 序列模型
 
 **Seq2Seq（Sequence-to-Sequence）**模型能够应用于机器翻译、语音识别等各种序列到序列的转换问题。一个 Seq2Seq 模型包含**编码器（Encoder）**和**解码器（Decoder）**两部分，它们通常是两个不同的 RNN，将编码器的输出作为解码器的输入，由解码器负责输出正确的翻译结果。
 
-![img](http://www.ai-start.com/dl2017/images/2d41c0090fd3d71e6f28eade62b7c97b.png)
+![img](https://i.loli.net/2021/08/04/yHekzjfKh6taDw2.png)
 
 这种编码器-解码器的结构也可以用于图像描述。将 AlexNet 作为编码器，最后一层的 Softmax 换成一个 RNN 作为解码器，网络的输出序列就是对图像的一个描述。
 
-![img](http://www.ai-start.com/dl2017/images/b9492d18803ebe3853e936098f08661c.png)
+![img](https://i.loli.net/2021/08/04/tTBlm68bDk2Vc93.png)
 
 • 贪心搜索Greedy Search：生成第一个词的分布以后，它将会根据你的条件语言模型挑选出最有可能的第一个词进入你的机器翻译模型中，在挑选出第一个词之后它将会继续挑选出最有可能的第二个词，然后继续挑选第三个最有可能的词
 
@@ -184,15 +184,15 @@ CBOW与Skip-gram相反，使用上下文的词来预测目标词，对输出相�
 
 Beam Search倾向于选择句长更短的句子，我们可以做长度标准化来解决这个问题
 
-![img](http://www.ai-start.com/dl2017/images/14a940ae2ea7932b7b7190eceb79f79e.png)
+![img](https://i.loli.net/2021/08/04/JPOM4bnYzKqX9DG.png)
 
 ### Attention机制
 
 注意力模型的一个示例网络结构如下图所示。其中，底层是一个双向循环神经网络（BRNN），该网络中每个时间步的激活都包含前向传播和反向传播产生的激活。顶层是一个“多对多”结构的循环神经网络，第 t 个时间步的输入包含该网络中前一个时间步的激活 s⟨t−1⟩、输出 y⟨t−1⟩以及底层的 BRNN 中多个时间步的激活 c
 
-![img](http://www.ai-start.com/dl2017/images/1e6b86a4e3690b4a0c6b8146ffa2f791.png)
+![img](https://i.loli.net/2021/08/04/BfT2ScuOlW3DY1V.png)
 
-![img](http://www.ai-start.com/dl2017/images/b22dff4a3b1a4ea8c1ab201446e98889.png)
+![img](https://i.loli.net/2021/08/04/8TaCWgzYcHkMu1x.png)
 
 ### 语音识别
 
@@ -200,10 +200,10 @@ Beam Search倾向于选择句长更短的句子，我们可以做长度标准化
 
 语音识别系统可以用注意力模型来构建，在输入音频的不同时间帧上，可以用一个注意力模型，来输出文本描述
 
-![img](http://www.ai-start.com/dl2017/images/4130b85a0694549f02bdf60f7c47a3d7.png)
+![img](https://i.loli.net/2021/08/04/IbzHhrMq9UwGd25.png)
 
 **CTC**损失函数
 
 由于输入是音频数据，使用 RNN 所建立的系统含有很多个时间步，且输出数量往往小于输入。因此，不是每一个时间步都有对应的输出。CTC 允许 RNN 生成下图蓝字所示的输出，并将两个空白符中重复的字符折叠起来，再将空白符去掉，得到最终的输出文本。
 
-![img](http://www.ai-start.com/dl2017/images/8f409fc3980b0be00dca49bf4fac2659.png)
+![img](https://i.loli.net/2021/08/04/dg2W549oVLIzB6r.png)
