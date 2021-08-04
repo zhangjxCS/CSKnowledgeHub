@@ -46,7 +46,7 @@ Leaky ReLU（带泄漏的 ReLU）：$a=max(0.01z,z)$
 
 Leaky ReLU 保证在 z < 0 的时候，梯度仍然不为 0。理论上来说，Leaky ReLU 有 ReLU 的所有优点，但在实际操作中没有证明总是好于 ReLU，因此不常用
 
-![w600](http://www.ai-start.com/dl2017/images/L1_week3_9.jpg)
+![w600](https://i.loli.net/2021/08/02/GEeuqFxMY9noD2b.jpg)
 
 7.为什么需要non-linear activation functions
 
@@ -84,7 +84,7 @@ Mini-batch Gradient Descend：每次同时处理单个的 mini-batch，其他与
 
 Stochastic Gradient Descend：对每一个训练样本执行一次梯度下降，训练速度快
 
-![image-20210320131646991](/Users/zhangjingxiang/Library/Application Support/typora-user-images/image-20210320131646991.png)
+![image-20210320131646991](https://i.loli.net/2021/08/02/NZgAcEaq74b3r1e.png)
 
 Batch梯度下降对所有样本做一次梯度下降，每次的迭代时间较长；Mini-batch梯度下降使用部分样本做梯度下降，兼容了模型的训练速度和梯度下降方向的准确性；随机梯度下降对每个样本进行一次梯度下降，速度最快，但噪声较大，且永远不会收敛
 

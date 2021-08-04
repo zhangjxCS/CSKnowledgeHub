@@ -6,7 +6,7 @@
 
 假设输入图片的大小为$n×n$，而滤波器的大小为$f×f$，则卷积后的输出图片大小为$(n−f+1)×(n−f+1)$
 
-![img](http://www.ai-start.com/dl2017/images/f889ad7011738a23d78070e8ed2df04e.png)
+![img](https://i.loli.net/2021/08/02/oAjQbqfurwDtsan.png)
 
 普通卷积运算存在的问题是：每次卷积运算后，输出图片的尺寸缩小；原始图片的角落、边缘区像素点在输出中采用较少，输出图片丢失边缘位置的很多信息。为了解决这个问题，在进行卷积操作前，对原始图片在边界上进行**填充（Padding）**，以增加矩阵的大小。通常将 0 作为填充值。
 
@@ -20,11 +20,11 @@ $$
 
 如果我们想要对三通道的 RGB 图片进行卷积运算，那么其对应的滤波器组也同样是三通道的。过程是将每个单通道（R，G，B）与对应的滤波器进行卷积运算求和，然后再将三个通道的和相加，将 27 个乘积的和作为输出图片的一个像素值。
 
-![img](http://www.ai-start.com/dl2017/images/d148c3dd7ce9e6d7e29c02c483298842.png)
+![img](https://i.loli.net/2021/08/02/NkWiVebrlOf4dQ2.png)
 
 如果想同时检测垂直和水平边缘，或者更多的边缘检测，可以增加更多的滤波器组。例如设置第一个滤波器组实现垂直边缘检测，第二个滤波器组实现水平边缘检测。设输入图片的尺寸为$n×n×n_c$（$n_c$为通道数），滤波器尺寸为$f×f×n_c$，则卷积后的输出图片尺寸为$ (n−f+1)×(n−f+1)×n′_c$，$n′_c$为滤波器组的个数。
 
-![img](http://www.ai-start.com/dl2017/images/794b25829ae809f93ac69f81eee79cd1.png)
+![img](https://i.loli.net/2021/08/02/XjicpDbhByIVZeo.png)
 
 3.卷积操作的原理
 
@@ -39,7 +39,7 @@ $$
 
 对于一个 3x3x3 的滤波器，包括偏移量 bb在内共有 28 个参数。不论输入的图片有多大，用这一个滤波器来提取特征时，参数始终都是 28 个，固定不变。即**选定滤波器组后，参数的数目与输入图片的尺寸无关**。因此，卷积神经网络的参数相较于标准神经网络来说要少得多。这是 CNN 的优点之一。
 
-![img](http://www.ai-start.com/dl2017/images/0c09c238ff2bcda0ddd9405d1a60b325.png)
+![img](https://i.loli.net/2021/08/02/c425dns6QgAzmrT.png)
 
 2.池化层
 
@@ -49,7 +49,7 @@ $$
 
 **平均池化（Average Pooling）**：从取某个区域的最大值改为求这个区域的平均值
 
-![img](http://www.ai-start.com/dl2017/images/ac42ede86634922acf4d34b12025b34f.png)
+![img](https://i.loli.net/2021/08/02/AkOG1FI9uYNVSiX.png)
 
 ## 经典模型
 
@@ -60,14 +60,14 @@ $$
 - 典型的 LeNet-5 结构包含卷积层（CONV layer），池化层（POOL layer）和全连接层（FC layer），排列顺序一般为 CONV layer->POOL layer->CONV layer->POOL layer->FC layer->FC layer->OUTPUT layer。一个或多个卷积层后面跟着一个池化层的模式至今仍十分常用。
 - 当 LeNet-5模型被提出时，其池化层使用的是平均池化，而且各层激活函数一般选用 Sigmoid 和 tanh。现在，我们可以根据需要，做出改进，使用最大池化并选用 ReLU 作为激活函数。
 
-![img](http://www.ai-start.com/dl2017/images/a3931d10222ebaf43490935d391eeceb.png)
+![img](https://i.loli.net/2021/08/02/IJcUaSYs4uQ1vVl.png)
 
 ### AlexNet
 
 - AlexNet 模型与 LeNet-5 模型类似，但是更复杂，包含约 6000 万个参数。另外，AlexNet 模型使用了 ReLU 函数。
 - 当用于训练图像和数据集时，AlexNet 能够处理非常相似的基本构造模块，这些模块往往包含大量的隐藏单元或数据。
 
-![img](http://www.ai-start.com/dl2017/images/6a9d80274dc6315d9d8c0c27b81548b4.png)
+![img](https://i.loli.net/2021/08/02/ZSzqvTtModxWU3K.png)
 
 ### VGG-16
 
@@ -76,7 +76,7 @@ $$
 - 结构不复杂且规整，在每一组卷积层进行滤波器翻倍操作。
 - VGG 需要训练的特征数量巨大，包含多达约 1.38 亿个参数。
 
-![img](http://www.ai-start.com/dl2017/images/4a5b3f4c8b34eb8cdca6c36b46af142d.png)
+![img](https://i.loli.net/2021/08/02/Cl3Mdkr1HoXfe5z.png)
 
 ### ResNets
 
@@ -86,11 +86,11 @@ $$
 
 
 
-![img](http://www.ai-start.com/dl2017/images/131e538bb527859430280becd65b049b.png)
+![img](https://i.loli.net/2021/08/02/GeLMhaPE9muIjgd.png)
 
 ### Inception
 
 在之前的卷积网络中，我们只能选择单一尺寸和类型的滤波器。而 **Inception 网络的作用**即是代替人工来确定卷积层中的滤波器尺寸与类型，或者确定是否需要创建卷积层或池化层
 
-![img](http://www.ai-start.com/dl2017/images/99f8fc7dbe7cd0726f5271aae11b9872.png)
+![img](https://i.loli.net/2021/08/02/8wsLWXR1jaAvgKC.png)
 
