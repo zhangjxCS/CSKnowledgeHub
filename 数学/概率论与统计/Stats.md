@@ -62,11 +62,11 @@ In practice, a given sample generally cannot be assumed to be representative of 
 
 - Graph
 
-  line graph*: plots the distinct data values on the horizontal axis and indicates their frequencies by the heights of vertical lines
+  line graph: plots the distinct data values on the horizontal axis and indicates their frequencies by the heights of vertical lines
 
 <img src="https://i.loli.net/2021/08/03/r6f7OXvjzBysDmi.png" alt="image-20210725132021997" style="zoom:25%;" />
 
-bar graph*: lines in a line graph are given added thickness
+bar graph: lines in a line graph are given added thickness
 
 <img src="https://i.loli.net/2021/08/03/zu3dkCpZD2eiOxK.png" alt="image-20210725132047571" style="zoom: 25%;" />
 
@@ -177,29 +177,83 @@ The maximum likelihood estimate $\theta$ is defined to be that value of $\theta$
 
 ### Interval Estimation
 
+- Confidence Interval for a Normal Mean and Variance
+
 ![image-20210820114602135](https://i.loli.net/2021/08/20/ZFMNOIx6e3l7n1D.png)
 
+- THE DIFFERENCE IN MEANS OF TWO NORMAL POPULATIONS
+
 ![image-20210820115756232](https://i.loli.net/2021/08/20/5j1VPzKWsmy3Qrw.png)
+
+- CONFIDENCE INTERVAL FOR THE MEAN OF A BERNOULLI RANDOM VARIABLE: *X* is approximately normally distributed with mean *np* and variance *np*(1 − *p*)
 
 <img src="https://i.loli.net/2021/08/20/BQWbNFfoG8M1q4n.png" alt="image-20210820115928895" style="zoom: 67%;" />
 
 ## Hypothesis Testing
 
-Week 9: hypothesis testing, z-tests under different situations 
+### Overview
 
-Week 10: one sample t-tests, two samples, paired, binomial tests
+A statistical hypothesis is usually a statement about a set of parameters of a population distribution.
+
+- null hypothesis: a default hypothesis that a quantity to be measured is zero (null)
+
+- type I error:  the test incorrectly calls for rejecting *H*0 when it is indeed correct
+- type II error: the test calls for accepting *H*0 when it is false
+- level of significance of the test: usually set in advance, with commonly chosen values being α = .1, .05, .005, the classical approach to testing *H*0 is to fix a significance level α and then require that the test have the property that the probability of a type I error occurring can never be greater than α
+- *p*-value of the test: gives the critical significance level in the sense that *H*0 will be accepted if the significance level α is less than the *p*-value and rejected if it is greater than or equal.
+
+### Mean of a Normal Population
 
 ![image-20210820121250808](https://i.loli.net/2021/08/20/AoT9Dms5nWzwqBt.png)
 
 ![image-20210820121349544](https://i.loli.net/2021/08/20/KOhxwSGlo7rkBpJ.png)
 
+### Means of Two Normal Populations
+
 ![image-20210820121434365](https://i.loli.net/2021/08/20/Br7F6vSQAXzyMcu.png)
+
+### Variance of a Normal Population
+
+- test of a population variance
+
+$$
+H_0: \sigma^2=\sigma_0^2 \ \ \  versus\ \ \ H_1:\sigma^2 \ne \sigma^2_0
+$$
+
+$$
+\frac{(n-1)S^2}{\sigma_0^2}\sim X_{n-1}^2
+$$
+
+$$
+accept\ H_0\ if\ X_{1-\alpha/2,n-1}^2\le \frac{(n-1)S^2}{\sigma_0^2}\le X_{\alpha/2,n-1}^2\ else \ reject
+$$
+
+- test of two populations variance
+
+$$
+H_0: \sigma_x^2=\sigma_y^2\ versus\ H_1: \sigma_x^2\ne \sigma_y^2
+$$
+
+$$
+S_x^2/S_y^2\sim F_{n-1,m-1}
+$$
+
+$$
+accept\ H_0\ if\ F_{1-\alpha/2,n-1,m-1}\le S_x^2/S_y^2\le X_{\alpha/2,n-1,m-1}\ else \ reject
+$$
+
+### Bernoulli Populations
+
+When the sample size *n* is large, we can derive an *approximate* significance level α test of *H*0 : *p* ≤ *p*0 versus *H*1 : *p* > *p*0 by using the normal approximation to the binomial.
+$$
+\frac{X-np_0}{\sqrt{np_0(1-p_0)}}\ge z_{\alpha}
+$$
 
 ## Regression
 
 ### Overview
 
-In many situations, there is a single *response* variable $Y$ , also called the *dependent* variable, which depends on the value of a set of *input*, also called *independent*, variables $*x_1,...,x_r$
+In many situations, there is a single *response* variable $Y$ , also called the *dependent* variable, which depends on the value of a set of *input*, also called *independent*, variables $x_1,...,x_r$
 $$
 Y=\beta_0+\beta_1x_1+...+\beta_rx_r+e
 $$

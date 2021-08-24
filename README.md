@@ -42,7 +42,7 @@ git clone git@github.com:zhangjx831/Data-Science-Notes.git
 
 ### 数学
 
-- 概率论与统计：[概率论](https://github.com/zhangjx831/Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/%E6%A6%82%E7%8E%87%E8%AE%BA.md), [统计](https://github.com/zhangjx831/Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/%E7%BB%9F%E8%AE%A1.md), [英文版](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/%E6%A6%82%E7%BB%9F.md)
+- 概率论与统计：[概率论](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/Probs.md), [统计](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/Stats.md)
 
 ### 机器学习
 

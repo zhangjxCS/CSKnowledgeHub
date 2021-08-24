@@ -227,7 +227,7 @@ The Poisson random variable may be used as an approximation for a binomial rando
 
 A bin contains *N* + *M* batteries, of which *N* are of acceptable quality and the other *M* are defective. A sample of size *n* is to be randomly chosen (without replacements) in the sense that the set of sampled batteries is equally likely to be any of the 􏰍*N*+*M*􏰀 subsets of *n* size *n*. If we let *X* denote the number of acceptable batteries in the sample, then
 $$
-P(X=i)=\frac{C_N^iC_{n-i}^M}{C_{N+M}^n}
+P(X=i)=\frac{C_N^iC_{M}^{n-i}}{C_{N+M}^n}
 $$
 
 $$
@@ -243,7 +243,7 @@ For fixed *p*, as *N* + *M* increases to ∞, Var(*X*) converges to *np*(1 − *
 ### Uniform
 
 $$
-f(x)=\frac{1}{\beta-\alpha}, if \alpha\le x \le \beta
+f(x)=\frac{1}{\beta-\alpha},\ if\ \alpha\le x \le \beta
 $$
 
 $$
@@ -262,8 +262,9 @@ $$
 
 ### Exponential
 
+In probability theory and statistics, the **exponential distribution** is the probability distribution of the time between events in a Poisson point process
 $$
-f(x)=\lambda e^{-\lambda x}, if x\ge0
+f(x)=\lambda e^{-\lambda x}, \ if\ x\ge0
 $$
 
 $$
