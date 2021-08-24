@@ -1,31 +1,3 @@
-## Outline
-
-Week 1: introduction; data and presentations; descriptive statistics
-
-Week 2: sample spaces, set operations, axioms probability; conditional probability 
-
-Week 3: random variables (rv), pmfs/pdfs/cdfs; independence, expected value, joint rvs
-
-Week 4: conditional rvs, variance/covariance/correlations; inequalities, weak law of large numbers (LLN)
-
-Week 5: discrete named distributions (Bernoulli, binomial, hypergeometric, Poisson, etc)
-
-Week 6: continuous named distributions (normal, exponential, uniform,Chi-square); Poisson process
-
-Week 7: parameters, likelihood, maximum likelihood estimation (MLE), central limit theorem (CLT) continuity corrections, general confidence intervals
-
-Week 8: z-scores, z-intervals, prediction intervals, sampling distribution of the mean estimator; t-intervals, binomial intervals
-
-Week 9: hypothesis testing, z-tests under different situations 
-
-Week 10: one sample t-tests, two samples, paired, binomial tests
-
-Week 11: simple regression overview, MLE estimates and their distributions; multiple regression optimization
-
-Week 12: weighted least squares, multiple linear regression, one way/two way analysis of variance (ANOV A)
-
-Week 13: Chi-square goodness of fit; review
-
 ## Fundamental
 
 ### Data Collection
@@ -189,6 +161,13 @@ The maximum likelihood estimate $\theta$ is defined to be that value of $\theta$
 
 <img src="https://i.loli.net/2021/08/20/BQWbNFfoG8M1q4n.png" alt="image-20210820115928895" style="zoom: 67%;" />
 
+### Prediction Intervals
+
+Suppose that *X*1, . . . , *Xn*, *Xn*+1 is a sample from a normal distribution with unknown mean μ and unknown variance σ. Suppose further that the values of *X*1 , . . . , *X*n are to be observed and that we want to use them to predict the value of *X*n+1
+$$
+P(-t_{\alpha/2,n-1}<\frac{X_{n+1}-\bar X_n}{S_n\sqrt{1+1/n}}<t_{\alpha/2,n-1})
+$$
+
 ## Hypothesis Testing
 
 ### Overview
@@ -239,7 +218,7 @@ S_x^2/S_y^2\sim F_{n-1,m-1}
 $$
 
 $$
-accept\ H_0\ if\ F_{1-\alpha/2,n-1,m-1}\le S_x^2/S_y^2\le X_{\alpha/2,n-1,m-1}\ else \ reject
+accept\ H_0\ if\ F_{1-\alpha/2,n-1,m-1}\le S_x^2/S_y^2\le F_{\alpha/2,n-1,m-1}\ else \ reject
 $$
 
 ### Bernoulli Populations
