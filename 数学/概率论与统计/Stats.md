@@ -303,9 +303,9 @@ $$
 
 ### Parameter Distribution
 
-<img src="../../../Library/Application Support/typora-user-images/image-20210821201317001.png" alt="image-20210821201317001" style="zoom:50%;" />
+<img src="https://i.loli.net/2021/08/24/152w6RhPiAq3xzd.png" alt="image-20210821201317001" style="zoom:50%;" />
 
-<img src="../../../Library/Application Support/typora-user-images/image-20210821201340782.png" alt="image-20210821201340782" style="zoom:50%;" />
+<img src="https://i.loli.net/2021/08/24/JZlO6MKS5zubEPv.png" alt="image-20210821201340782" style="zoom:50%;" />
 
 ### Determination
 
