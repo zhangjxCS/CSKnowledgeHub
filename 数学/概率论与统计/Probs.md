@@ -19,7 +19,7 @@ Bayesian interpretation: the probability of an outcome is considered a statement
   - associative law: $(E\cup F)\cup G=E\cup (F\cup G)$
   - distributive law: $(E\cup F)\cap G=(E\cap G) \cup (F\cap G)$
 
-![image-20210725182157150](https://i.loli.net/2021/08/21/uGvIayV7fZ6zseS.png)
+![image-20210725182157150](https://i.loli.net/2021/10/28/2CDNtEvHIomxnzf.png)
 
 ### Conditional Probability
 
