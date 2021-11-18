@@ -1,3 +1,19 @@
+## 序列模型
+
+$$
+P(x)=P(x_1,x_2,...,x_T)=P(x_1)P(x_2|x_1)P(x_3|x_1,x_2)...P(x_T|x_1,...,x_{T-1})
+$$
+
+$$
+P(x)=P(x_1,x_2,...,x_T)=P(x_T)P(x_{T-1}|x_T)P(x_{T-2}|x_{T-1},x_T)...p(x_1|x_2,...,x_T)
+$$
+
+自回归模型：使用序列数据的前部分样本进行预测
+
+马尔可夫假设：当前数据之根过去t个数据相关（可以使用mlp进行训练）
+
+潜变量模型： 引入潜变量ht来表示过去的信息
+
 ## RNN模型
 
 ### 语句表示
@@ -27,6 +43,8 @@ $$
 ![img](https://i.loli.net/2021/08/04/VMPcZnrig6opvI1.png)
 
 通过RNN来预测一个序列的值通常需要两步，第一步是构建一个语言模型，第二部是通过采样来构建序列
+
+梯度裁剪gradient clipping：防止梯度爆炸，若梯度过大，则除以梯度的模长$g=min(1,\frac{\theta}{||g||})g$
 
 ### 语言模型
 
@@ -60,16 +78,16 @@ $$
 $$
 
 $$
-a^{<t>}=c^{<t>}=\Gamma_u * \tilde c^{<t-1>}+(1-\Gamma_u)*c^{<t-1>}
+a^{<t>}=c^{<t>}=\Gamma_u * \tilde c^{<t>}+(1-\Gamma_u)*c^{<t-1>}
 $$
 
 ![img](https://i.loli.net/2021/08/04/cDJTWHUgOPkS2ua.png)
 
 ### LSTM
 
-相比于GRU，LSTM新引入了遗忘门$\Gamma_f$和输出门$\Gamma_o$，去掉了相关门$\Gamma_r$
+相比于GRU，LSTM引入了遗忘门$\Gamma_f$和输出门$\Gamma_o$输入门$\Gamma_i$
 $$
-\Gamma_u=\sigma(W_u[a^{<t-1>},x^{<t>}]+b_u)
+\Gamma_i=\sigma(W_i[a^{<t-1>},x^{<t>}]+b_i)
 $$
 
 $$
@@ -81,11 +99,11 @@ $$
 $$
 
 $$
-\tilde c^{<t>}=tanh(W_c[\Gamma_r*c^{<t-1>},x^{<t>}]+b_c)
+\tilde c^{<t>}=tanh(W_c[c^{<t-1>},x^{<t>}]+b_c)
 $$
 
 $$
-c^{<t>}=\Gamma_u * \tilde c^{<t-1>}+\Gamma_f*c^{<t-1>}
+c^{<t>}=\Gamma_i * \tilde c^{<t-1>}+\Gamma_f*c^{<t-1>}
 $$
 
 $$
