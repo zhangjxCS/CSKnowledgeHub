@@ -44,7 +44,19 @@ $$
 
 通过RNN来预测一个序列的值通常需要两步，第一步是构建一个语言模型，第二部是通过采样来构建序列
 
-梯度裁剪gradient clipping：防止梯度爆炸，若梯度过大，则除以梯度的模长$g=min(1,\frac{\theta}{||g||})g$
+RNN的反向传播是通过时间的(Back Propagation Through Time BPTT)，前一个时间步的梯度相乘，当时间序列过程时，非常容易出现梯度消失或者梯度爆炸问题
+
+梯度爆炸：梯度值特别大
+
+- Truncated BPTT：将RNN分成不同的chunk，每次梯度计算只在特定的chunk上计算，例如3个rnn unit为一个trunk
+
+- 梯度裁剪gradient clipping：防止梯度爆炸，若梯度过大，则除以梯度的模长$g=min(1,\frac{\theta}{||g||})g$
+
+梯度消失：梯度值特别小
+
+- 激活函数：使用RELU激活函数可以减小梯度消失问题，RELU激活函数的导数为1
+- 使用LSTM：LSTM结构的forget gate擅长处理梯度消失问题
+- 初始化：将权重矩阵初始化为正交矩阵
 
 ### 语言模型
 

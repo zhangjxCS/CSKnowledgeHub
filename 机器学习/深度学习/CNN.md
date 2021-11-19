@@ -88,5 +88,7 @@ $$
 
 下图中的inception块从4个不同路径抽取信息，然后在输出通道合并。
 
+![img](https://i.loli.net/2021/11/20/pyQ6Z7HBngEfkdI.png)
+
 ![img](https://i.loli.net/2021/08/02/8wsLWXR1jaAvgKC.png)
 
