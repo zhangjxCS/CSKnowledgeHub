@@ -21,6 +21,10 @@ Bayesian interpretation: the probability of an outcome is considered a statement
 
 ![image-20210725182157150](https://i.loli.net/2021/10/28/2CDNtEvHIomxnzf.png)
 
+### Principal of Counting
+
+If *r* experiments that are to be performed are such that the first one may result in any of *n*1 possible outcomes, and if for each of these *n*1 possible outcomes there are *n*2 possible outcomes of the second experiment, and if for each of the possible outcomes of the first two experiments there are *n*3 possible outcomes of the third experiment, and if, . . . , then there are a total of *n*1 · *n*2 · · · *n**r* possible outcomes of the *r* experiments.
+
 ### Conditional Probability
 
 - general formula
@@ -110,7 +114,7 @@ $$
   - $E[g(x)]=\sum_xg(x)p(x)$, $E[g(x)]=\int g(x)f(x)dx$
   - $E[aX+b]=aE[X]+b$
   - $E[g(X,Y)]=\sum_y \sum_xg(x,y)p(x,y)$, $E[g(X,Y)]=\int \int g(x,y)f(x, y)dxdy$
-  - $E[X+Y]=E[X]+E[Y]$
+  - linearity of expectation: $E[X+Y]=E[X]+E[Y]$
 
 ### Variance
 
@@ -198,7 +202,7 @@ $$
 
 ### Possion
 
-A random variable *X*, taking on one of the values 0, 1, 2,..., is said to be a Poisson random variable with parameter$\lambda$, $\lambda$ > 0, if its probability mass function is given by
+A random variable *X*, taking on one of the values 0, 1, 2,..., is said to be a Poisson random variable with parameter$\lambda$, $\lambda$ > 0, and it means $\lambda$ events occur in a time period. The probablity mass function is given by
 $$
 P(X=i)=e^{-\lambda}\frac{\lambda^i}{i!}
 $$
@@ -222,6 +226,14 @@ $$
 The Poisson random variable may be used as an approximation for a binomial random variable with parameters (*n*, *p*) when *n* is large and *p* is small, in that case $\lambda=np$
 
 <img src="https://i.loli.net/2021/08/04/Xy32mSYOxFnrVwz.png" alt="image-20210726235942973" style="zoom:25%;" />
+
+The passion process is the events occurring at random time points, and N(t) denotes the number of events that occurs in the time interval [0, t]
+
+- $N(0)=0$
+- The number of events that occur in disjoint time intervals are independent
+- The distrubution of the number of events that occur in a given interval depends only on the length of the interval and not on its location
+- $lim_{h->0}\frac{P(N(h)=1)}{h}=\lambda$
+- $lim_{h->0}\frac{P(N(h)\ge2)}{h}=0$
 
 ### Hypergeometric
 
@@ -281,6 +293,22 @@ $$
 
 Exponentially distributed random variables are memoryless
 
+### Gamma
+
+$$
+f(x)=\frac{\lambda e^{-\lambda x}(\lambda x)^{\alpha-1}}{\Gamma (\alpha)}
+$$
+
+$$
+\Gamma(\alpha)=\int _0^{inf}\lambda e^{-\lambda x}(\lambda x)^{\alpha-1}dx=(\alpha-1)\Gamma(\alpha-1)
+$$
+
+$$
+E[X]=\frac{\alpha}{\lambda}, Var(X)=\frac{\alpha}{\lambda^2}
+$$
+
+If *X*1 and *X*2 are independent gamma random variables having respective parameters (α1, λ) and (α2, λ), then *X*1 + *X*2 is a gamma random variable with parameters (α1 + α2, λ)
+
 ### Chi-square
 
 $$
@@ -294,6 +322,8 @@ $$
 $$
 Var[X]=2n
 $$
+
+chi-square with *n* degrees of freedom and gamma with parameters *n*/2 and 1/2 — are identical
 
 ### t-Distribution
 

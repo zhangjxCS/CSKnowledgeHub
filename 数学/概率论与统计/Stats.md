@@ -122,8 +122,6 @@ Correlation measures association, not causation, we can not conclude that high c
 
 ## Parameter Estimation
 
-Week 8: z-scores, z-intervals, prediction intervals, sampling distribution of the mean estimator; t-intervals, binomial intervals
-
 - Parametric Inference: Problems in which the form of the population distribution is specified up to a set of unknown parameters are called *parametric* inference
 - Nonparametric Inference: Problems that nothing is assumed about the form of population distribution are called *nonparametric* inference problems
 
@@ -147,6 +145,10 @@ No matter how nonnormal the underlying population distribution is, the sample me
 
 The maximum likelihood estimate $\theta$ is defined to be that value of $\theta$ maximizing $f (x_1,...,x_n|\theta)$ where $x_1,...,x_n$ are the observed values. The function  is $f (x_1,...,x_n|\theta)$ often referred to as the *likelihood* function of $\theta$
 
+MLE for Normal Distribution: $\mu = \bar X$,  $S=[\sum_{i=1}^n (X_i-\bar X)^2/n]^{1/2}$
+
+MLE for Uniform Distribution: $\hat \theta=max(X_1, X_2, ..., X_m)$
+
 ### Interval Estimation
 
 - Confidence Interval for a Normal Mean and Variance
@@ -168,28 +170,77 @@ $$
 P(-t_{\alpha/2,n-1}<\frac{X_{n+1}-\bar X_n}{S_n\sqrt{1+1/n}}<t_{\alpha/2,n-1})
 $$
 
+### Bayes Estimation
+
+Prior to the observance of the outcomes of the data *X*1, . . . , *X**n*, we have some information about the value of θ and this information is expressible in terms of a probability distribution.
+
+Bayes Estimator: $E[\theta|X_1,X_2,...,X_n]$
+$$
+f(\theta|x_1,...,x_n)=\frac{f(\theta,x_1,...x_n)}{f(x_1,...,x_n)}=\frac{p(\theta)f(x_1,...,x_n|\theta)}{\int f(x_1,...,x_n|\theta)p(\theta)d\theta}
+$$
+
+$$
+E[\theta|X_1,X_2,...,X_n]=\int \theta f(\theta|x_1,...,x_n)d\theta
+$$
+
 ## Hypothesis Testing
 
 ### Overview
 
 A statistical hypothesis is usually a statement about a set of parameters of a population distribution.
 
-- null hypothesis: a default hypothesis that a quantity to be measured is zero (null)
-
+- null hypothesis: a default hypothesis that a quantity to be measured is zero (null). The null hypothesis is set to be rejected
 - type I error:  the test incorrectly calls for rejecting *H*0 when it is indeed correct
 - type II error: the test calls for accepting *H*0 when it is false
 - level of significance of the test: usually set in advance, with commonly chosen values being α = .1, .05, .005, the classical approach to testing *H*0 is to fix a significance level α and then require that the test have the property that the probability of a type I error occurring can never be greater than α
 - *p*-value of the test: gives the critical significance level in the sense that *H*0 will be accepted if the significance level α is less than the *p*-value and rejected if it is greater than or equal.
 
+### Power of Test
+
+Type2 Error: The null hypothesis is false, but we fail to reject it, the probability is 1 - $\beta$, called the power-function of the test
+$$
+\beta=P(-z_{\alpha/2}\le \frac{\bar X-\mu_0}{\sigma/\sqrt n}\le z_{\alpha/2})=P(\frac{\mu_0-\mu}{\sigma/\sqrt n}-z_{\alpha/2}\le Z\le \frac{\mu_0-\mu}{\sigma/\sqrt n}+z_{\alpha/2})
+$$
+The power function is useful in determining how large the random sample need be to meet certain specifications concerning type II errors. We assume that $\mu_1>\mu_0$,  therefore $\phi(\frac{\mu_0-\mu_1}{\sigma/\sqrt n}-z_{\alpha/2})\approx 0$
+$$
+\beta=P(\frac{\mu_0-\mu_1}{\sigma/\sqrt n}-z_{\alpha/2}\le Z\le \frac{\mu_0-\mu_1}{\sigma/\sqrt n}+z_{\alpha/2})
+$$
+
+$$
+\beta\approx \phi(\frac{\mu_0-\mu_1}{\sigma/\sqrt n}+z_{\alpha/2})
+$$
+
+$$
+-z_\beta\approx \frac{\mu_0-\mu_1}{\sigma/\sqrt n}+z_{\alpha/2}
+$$
+
+$$
+n\approx \frac{(z_{\alpha/2}+z_\beta)^2\sigma^2}{(\mu_1-\mu_0)^2}
+$$
+
 ### Mean of a Normal Population
 
+- Known Variance
+
 ![image-20210820121250808](https://i.loli.net/2021/08/20/AoT9Dms5nWzwqBt.png)
+
+- Unknown Variance
 
 ![image-20210820121349544](https://i.loli.net/2021/08/20/KOhxwSGlo7rkBpJ.png)
 
 ### Means of Two Normal Populations
 
 ![image-20210820121434365](https://i.loli.net/2021/08/20/Br7F6vSQAXzyMcu.png)
+
+### Mean of Paired Population
+
+$$
+H_0:\mu_w=0\ \ versus\ \ H_1:\mu_w\ne 0
+$$
+
+$$
+accept\ H_0\ if\ -t_{\alpha/2,n-1}<\sqrt n \frac{\bar W}{S_W}<t_{\alpha/2,n-1},\ else\ reject
+$$
 
 ### Variance of a Normal Population
 
@@ -207,6 +258,10 @@ $$
 accept\ H_0\ if\ X_{1-\alpha/2,n-1}^2\le \frac{(n-1)S^2}{\sigma_0^2}\le X_{\alpha/2,n-1}^2\ else \ reject
 $$
 
+$$
+p-value=2min(P(X_{n-1}^2<c),1-P(X_{n-1}^2<c))
+$$
+
 - test of two populations variance
 
 $$
@@ -219,6 +274,10 @@ $$
 
 $$
 accept\ H_0\ if\ F_{1-\alpha/2,n-1,m-1}\le S_x^2/S_y^2\le F_{\alpha/2,n-1,m-1}\ else \ reject
+$$
+
+$$
+p-value=2min(P(F_{n-1,m-1}<v),1-P(F_{n-1,m-1}<v))
 $$
 
 ### Bernoulli Populations
@@ -269,6 +328,10 @@ S_{YY}=\sum(Y_i-\bar Y)^2=\sum Y_i^2-n\bar Y^2
 $$
 
 $$
+SS_R=\frac{S_{xx}S_{YY}-S_{xY}^2}{S_{xx}}
+$$
+
+$$
 B=\frac{\sum x_iY_i-n\bar x \bar Y}{\sum x_i^2-n\bar x^2}=\frac{S_{xY}}{S_{xx}}
 $$
 
@@ -288,6 +351,7 @@ $$
 
 ### Determination
 
+ How much of the variation in the values of the response variables is due to the different input values
 $$
 R^2=\frac{S_{YY}-SS_R}{S_{YY}}=1-\frac{SS_R}{S_{YY}}
 $$
