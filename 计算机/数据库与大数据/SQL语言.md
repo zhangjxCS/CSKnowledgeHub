@@ -21,7 +21,7 @@
 
 (2) where条件是在临时表生成好后，再对临时表进行过滤的条件。这时已经没有left join的含义（必须返回左边表的记录）了，条件不为真的就全部过滤掉。
 
-(3) inner join 与 where查询效果相同，但是inner join的查询效率更高，提前过滤了部分信息
+(3) inner join 与 where查询效果和查询效率相同，如果在on中加入其他过滤信息，那么inner join效率更高，因为提前过滤了信息
 
 (4) left join与where查询效果不同，先用on过滤，之后将过滤掉左表的信息添加回来，之后执行where，如果将条件写在where里面，就变成了inner join，损失了部分左表的信息
 
