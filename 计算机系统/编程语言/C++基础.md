@@ -242,15 +242,15 @@ class Temple
 
 ### 输出流
 
-- ostream: 标准输出
-- ofstream: 文件输出
-- ostringstream: 字符串输出
+- ostream: 输出，std::cout为标准输出函数，转化数据为字符串并输出至控制台
+- ofstream: 文件输出，需要预先初始化ofstream，转化所有数据为字符串并输出至文件流中
+- ostringstream: 字符串输出，数据转化为字符串
 
 ### 输入流
 
-- istream: 适合顺序文本输入
-- ifstream: 磁盘文件输入
-- Istringstream: 字符串输入
+- istream: 适合顺序文本输入，std::cin为标准输入函数，从控制台输入，getline可以实现按行输入，可以转化输入字符串为特定类型
+- ifstream: 磁盘文件输入，预先初始化ifstrem，转化数据为字符串并输出至文件流
+- istringstream: 字符串输入，任意输入数据存储为字符串
 
 ## 异常处理
 
