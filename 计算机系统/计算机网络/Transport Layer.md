@@ -38,7 +38,7 @@ The job of gathering data chunks at the source host from different sockets, enca
 
 ### UDP Segment Header
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220306151824460.png" alt="image-20220306151824460" style="zoom:33%;" />
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wk418yzj20o80k6t9r.jpg" alt="image-20220306151824460" style="zoom:33%;" />
 
 ### UDP Checksum
 
@@ -62,7 +62,7 @@ reliable transfer over a reliable channel
 - underlying channel not bit errors, and no loss of packets
 - Separate Finite State Machines for sender, receiver
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220306172217999.png" alt="image-20220306172217999" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wk1nax2j211g0tcmzn.jpg" alt="image-20220306172217999" style="zoom:50%;" />
 
 ### rdt 2.0 
 
@@ -82,7 +82,7 @@ Stop and wait: sender sends one packet, then waits for receiver response
 
 - receiver discards (doesn’t deliver up) duplicate pkt
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220306172139385.png" alt="image-20220306172139385" style="zoom: 50%;" />
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wjz02tdj20wg0u0ju1.jpg" alt="image-20220306172139385" style="zoom: 50%;" />
 
 ### rdt 2.1
 
@@ -90,7 +90,7 @@ Protocol rdt2.1 uses both positive and negative acknowledgments from the receive
 
 <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h00x9dzs9ej216e0u0787.jpg" alt="image-20220306173524860" style="zoom: 50%;" />
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220306173542417.png" alt="image-20220306173542417" style="zoom: 33%;" />
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wjtq04xj21e10u043v.jpg" alt="image-20220306173542417" style="zoom: 33%;" />
 
 ### rdt 2.2
 
@@ -104,5 +104,27 @@ Protocol rdt2.1 uses both positive and negative acknowledgments from the receive
 
 pipelining: sender allows multiple, “in-flight”, yet-to-be-acknowledged packets
 
-Go-Back-N: sender: “window” of up to N, consecutive transmitted but unACKed pkts 
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h036byrbrdj20qa0k0q57.jpg" alt="image-20220308162024860" style="zoom: 67%;" />
+
+### Go-Back-N
+
+- sender of “window” of up to N, consecutive transmitted but unACKed pkts, cumulative ACKs all packets up to, including seq # *n* 
+
+  on receiving ACK(*n*); timeout(n) then retransmit packet n and all higher seq # packets in window
+
+- Receiver always send ACK for correctly-received packet so far, with highest *in-order* seq # and delete out-of-order packet
+
+  <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02x2gjbemj218w09u3zz.jpg" alt="image-20220308105953318" style="zoom:50%;" />
+
+  <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wjoi9b3j21660qkwle.jpg" alt="image-20220308104140101" style="zoom:50%;" />
+
+### Selective Repeat
+
+- receiver individually acknowledges all correctly received packets, buffers packets, as needed, for eventual in-order delivery to upper layer
+
+- sender times-out/retransmits individually for unACKed packets, sender maintains timer for each unACKed pkt
+
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wlzenznj213c0ck405.jpg" alt="image-20220308104403314" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wmudfy5j21640o244n.jpg" alt="image-20220308104452149" style="zoom:50%;" />
 

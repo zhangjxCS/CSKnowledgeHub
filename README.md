@@ -33,7 +33,7 @@ git clone git@github.com:zhangjx831/Data-Science-Notes.git
 
 ### 数学基础
 
-- 概率论与统计：[概率论与统计](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/Probs.md), [统计推断](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/Stats%20Inference.md)
+- 概率论与统计：[概率论与统计](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/Probs%20and%20Stats.md), [统计推断](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E7%BB%9F%E8%AE%A1/Stats%20Inference.md)
 - 线性代数：[解方程组](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E8%A7%A3%E6%96%B9%E7%A8%8B%E7%BB%84.md) ,[向量空间](https://github.com/zhangjx831/Data-Science-Notes/blob/master/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4.md)
 
 ### 机器学习
