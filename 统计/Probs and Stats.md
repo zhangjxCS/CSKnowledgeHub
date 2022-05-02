@@ -1,3 +1,7 @@
+# Probs and Stats
+
+[toc]
+
 ## Fundamental
 
 ### Data Collection

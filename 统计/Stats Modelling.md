@@ -198,3 +198,17 @@ $$
 s.t. \sum_{j=1}^p|\beta_j|\le t
 $$
 
+## Generalized Linear Model
+
+- The response Y to follow any exponential family distribution, not just the normal distribution
+
+- Link the expectation of the response variable through a function g instead of making them equal to each other. The conditional variance is a known function of the mean parameter
+
+$$
+g(\mu)=g(E[Y|\bold X=\bold x])=\bold x^T\beta=\eta
+$$
+
+$$
+V[Y_i|\bold X_i=\bold x_i]=\phi V(\mu_i)
+$$
+

@@ -1,3 +1,7 @@
+# Stats Inference
+
+[toc]
+
 ## Stats Fundamental
 
 ### Convergence
