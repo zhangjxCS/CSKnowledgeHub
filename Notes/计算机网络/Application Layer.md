@@ -1,3 +1,7 @@
+# Application Layer
+
+[toc]
+
 ## Principles of Network Application
 
 At the core of network application development is writing programs that run on different end systems and communicate with each other over the network.
@@ -56,15 +60,11 @@ Persistent HTTP:
 - PUT: It allows a user to upload an object to a specific path (directory) on a specific Web server.
 - DELETE: The DELETE method allows a user, or an application, to delete an object on a Web server.
 
-<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzzn9yzu50j215w0p840v.jpg" alt="image-20220305150425107" style="zoom:50%;" />
-
 ### HTTP Response
 
 - STATUS code: 200(OK); 301(Moved Permanently); 400(Bad Request); 404(Not Found); 505(HTTP Version Not Supported)
 - Header: date, server, etc.
 - Entity body: response message
-
-<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzznhwzr0aj215a0ostb7.jpg" alt="image-20220305151203370" style="zoom:50%;" />
 
 ### Cookies
 
@@ -160,8 +160,6 @@ A registrar is a commercial entity that verifies the uniqueness of the domain na
 - Type MX: value is name of SMTP mail server associated with name
 
 ### DNS Messages
-
-<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzzqpjsgelj216m0sgwix.jpg" alt="image-20220305170310749" style="zoom:50%;" />
 
 ## P2P Application
 

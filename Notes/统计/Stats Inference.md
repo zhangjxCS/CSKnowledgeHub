@@ -36,7 +36,7 @@ $$
 
 ### Slutsky's Theorem
 
-If $X_n\stackrel{d}{\longrightarrow}X$ and $Y_n\stackrel{d}{\longrightarrow}c$, then the following
+If $X_n\stackrel{d}{\longrightarrow}X$ and $Y_n\stackrel{p}{\longrightarrow}c$, then the following
 $$
 X_n+Y_n\stackrel{d}{\longrightarrow}X+c
 $$

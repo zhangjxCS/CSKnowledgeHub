@@ -1,3 +1,7 @@
+# Transport Layer
+
+[toc]
+
 ## Transport Layer Services
 
 A transport-layer protocol provides for **logical communication** between application processes running on different hosts.
@@ -127,4 +131,148 @@ pipelining: sender allows multiple, “in-flight”, yet-to-be-acknowledged pack
 <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wlzenznj213c0ck405.jpg" alt="image-20220308104403314" style="zoom:50%;" />
 
 <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h02wmudfy5j21640o244n.jpg" alt="image-20220308104452149" style="zoom:50%;" />
+
+## Connection-Oriented Transport: TCP
+
+- Connection-Oriented: before one application process can begin to send data to another, the two processes must first “handshake” with each other, which is they first establish connection between each other.
+- Full-deuplex service: application-layer data can flow from Process A to Process B at the same time as application-layer data flows from Process B to Process A
+- Point-to-point: one sender, one receiver
+- Reliable: reliable data transfer service ensures that the data stream that a process reads out of its TCP receive buffer is uncorrupted, without gaps, without duplication, and in sequence
+- pipelining: TCP congestion and flow control
+
+### TCP Segment
+
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h1ws75nn5dj21490u0acs.jpg" alt="image-20220504111837396" style="zoom:50%;" />
+
+- Sequence number: The sequence number for a segment is the byte-stream number of the first byte in the segment.
+
+- Acknowledgment number: The acknowledgment number that Host A puts in its segment is the sequence number of the next byte Host A is expecting from Host B. TCP only acknowledges bytes up to the first missing byte in the stream, TCP is said to provide cumulative acknowledgments
+
+- Receive window: used to indicate the number of bytes that a receiver is willing to accept
+
+- Header length field: the length of the TCP header in 32-bit words
+
+- Options: used when a sender and receiver negotiate the maximum segment size (MSS) or as a window scaling factor for use in high-speed networks.
+- Flag filed: **ACK** is used to indicate that the value carried in the acknowledgment field is valid. **RST**, **SYN**, and **FIN** bits are used for connection setup and teardown. **PSH** bit indicates that the receiver should pass the data to the upper layer immediately. **URG** bit is used to indicate that there is data in this segment that the sending-side upper- layer entity has marked as “urgent.”
+
+### RTT and Timeout
+
+- TCP, like our rdt protocol in Section 3.4, uses a timeout/retransmit mechanism to recover from lost segments. 
+- The timeout should be larger than the connection’s round-trip time (RTT)
+- Exponential weighted moving average: the new value of **EstimatedRTT** is a weighted combination of the previous value of **EstimatedRTT** and the new value for **SampleRTT**
+
+$$
+EstimatedRTT=(1-\alpha)*EstimatedRTT+\alpha*SampleRTT
+$$
+
+$$
+DevRTT=(1-\beta)*DevRTT+\beta*|SampleRTT-EstimatedRTT|
+$$
+
+$$
+TimeoutInterval=EstimatedRTT+4*DevRTT
+$$
+
+### Reliable Data Transfer
+
+TCP’s reliable data transfer service ensures that the data stream that a process reads out of its TCP receive buffer is uncorrupted, without gaps, without duplication, and in sequence
+
+- TCP timer management procedures use only a *single* retransmission timer, even if there are multiple transmitted but not yet acknowledged segments
+- TCP fast retransmit: if sender receives 3 additional ACKs for same data, resend unACKed segment with smallest seq #
+
+### Flow Control
+
+- TCP provides a **flow-control service** to its applications to eliminate the possibility of the sender overflowing the receiver’s buffer.
+
+- TCP provides flow control by having the *sender* maintain a variable called the **receive window**.
+
+$$
+LastByteRcvd-LastByteRead\le RcvBuffer
+$$
+
+$$
+rwnd=RcvBuffer-[LastByteRcvd-LastByteRead]
+$$
+
+$$
+LastByteSent-LastByteAcked\le rwnd
+$$
+
+### Connection Management
+
+TCP 3-way handshake
+
+- The client-side TCP first sends a special TCP segment to the server-side TCP. Set the SYN segment to 1, and the client randomly chooses an initial sequence number and puts the number in the sequence number field
+- Once received TCP SYN segment, server allocates the TCP buffers and variables to the connection, and sends a connection-granted segment to the client TCP. Set the SYN bit to 1; the ack field is set to client seqnum + 1; Server chooses its own sequence number
+- Upon receiving the SYNACK segment, the client also allocates buffers and variables to the connection.
+
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h1wxpysp3qj210h0u0gob.jpg" alt="image-20220504142944636" style="zoom:50%;" />
+
+TCP close connection
+
+- The client application process issues a close command. This causes the client TCP to send a special TCP segment to the server process. The FIN bit is set to 1.
+- When the server receives this segment, it sends the client an acknowledgment segment in return.
+- The server then sends its own shutdown segment, which has the FIN bit set to 1.
+- Finally, the client acknowledges the server’s shutdown segment.
+
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h1wxy63cumj21240u0766.jpg" alt="image-20220504143738224" style="zoom:50%;" />
+
+## Principles of Congestion Control
+
+### Congestion Scenario
+
+- Congestion scenario 1: Two senders, a router with infinite buffers; The highest throughput is R/2. The average delay becomes larger and larger to infinity when the sending rate approaches R/2
+- Congestion scenario 2: Two senders and a router with finite buffers; The highest throughput is less than R/2 because of the following reasons. Packet will be dropped when arriving to an full buffer. The sender must pperform retransmissions to compensate for dropped packets. Unneeded retransmission by the sender cause a router to use its link bandwidth. 
+- Congestion scenario 3: Four senders, routers with finite buffers and multihop paths. The end-to-end throughput goes to zero in the limit of heavy traffic. When a packet is dropped along a path, the transmission capacity used before is wasted.
+
+### Approaches
+
+- End-to-end congestion control: TCP segment loss (as indicated by a timeout or the receipt of three duplicate acknowledgments) is taken as an indication of network congestion, and TCP decreases its window size accordingly.
+- Network-assisted congestion control: routers provide explicit feedback to the sender and/or receiver regarding the con- gestion state of the network.
+
+## TCP Congestion Control
+
+- A lost segment implies congestion, and hence, the TCP sender’s rate should be decreased when a segment is lost.
+
+- An acknowledged segment indicates that the network is delivering the sender’s segments to the receiver, and hence, the sender’s rate can be increased when an ACK arrives for a previously unacknowledged segment.
+- *Bandwidth probing*. Given ACKs indicating a congestion-free source-to-destina- tion path and loss events indicating a congested path, TCP’s strategy for adjusting its transmission rate is to increase its rate in response to arriving ACKs until a loss event occurs, at which point, the transmission rate is decreased.
+
+### TCP AIMD
+
+Approach: senders increase sending rate until packet loss occurs, then decrease sending rate on loss event.
+
+- Additive Increase: increase sending rate by 1 maximum segment size every RTT until loss detected
+- Multiplicative Decrease: cut sending rate in half at each loss event
+  - TCP Reno: cut in half on losss detected by triple duplicate ACK
+  - TCP Tahoe: cut to 1 maximum segment size MSS when loss detected by timeout
+
+$$
+LastByteSent - LastByteAcked\le cwnd
+$$
+
+$$
+TCP\ rate=\frac{cwnd}{RTT}
+$$
+
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h1x1nhnqqgj21mf0u0dih.jpg" alt="image-20220504164545969" style="zoom: 33%;" />
+
+### TCP slow start
+
+- When connection begins, increase rate exponentially until first loss event: Initial cwnd to 1 MSS and double cwnd every RTT
+- Variable ssthresh, on loss event, ssthrest is set to 1/2 of condo, when pkt length gets to ssthresh, exponential increase switch to linear
+
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h1x23tpgnbj21g00u0ads.jpg" alt="image-20220504170127860" style="zoom:33%;" />
+
+### TCP Cubic
+
+- Wmax: sending rate at which congestion loss was detected
+- CUBIC increases the congestion window as a function of *cube* of the distance between the current time, *t*, and *K*
+- After cutting rate in half on loss, initially ramp to Wmax faster, but then approach Wmax more slowly
+
+<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h1x1o1nsfnj21bk0u0dim.jpg" alt="image-20220504164618382" style="zoom:33%;" />
+
+### Delay-based congestion control
+
+- RTTmin: minimum observed RTT
+- uncongested throughput with congestion window cwnd is cwnd/RTTmin
 

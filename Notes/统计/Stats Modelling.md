@@ -1,3 +1,7 @@
+# Stats Modelling
+
+[toc]
+
 ## Markov Model
 
 $X_t$ denote a process taking values in a state space $S=\{1,...,S\}$. The data is of the form $X_0=s_0,...X_k=s_{t_k}$
@@ -200,8 +204,9 @@ $$
 
 ## Generalized Linear Model
 
-- The response Y to follow any exponential family distribution, not just the normal distribution
+### Introduction
 
+- The response Y to follow any exponential family distribution, not just the normal distribution
 - Link the expectation of the response variable through a function g instead of making them equal to each other. The conditional variance is a known function of the mean parameter
 
 $$
@@ -211,4 +216,166 @@ $$
 $$
 V[Y_i|\bold X_i=\bold x_i]=\phi V(\mu_i)
 $$
+
+- Canonical link: use the function that maps the mean of our response distribution to the parameter $\theta$ which we get by writing our density in the form
+
+$$
+g(\mu)=(b')^{-1}(\mu)
+$$
+
+- Consistency and asymptotic normality
+
+$$
+Consistency:\hat \beta\stackrel{p}{\longrightarrow} \beta
+$$
+
+$$
+Asymptotic\ normality:\sqrt n(\hat \beta-\beta)\stackrel{d}{\longrightarrow} N(0,I(\beta)^{-1}),I(\beta)=E[-\frac{\partial^2}{\partial \beta\partial \beta^{T}}\log f(Y_i,X_i,\beta)]
+$$
+
+### Goodness of fit
+
+One way to access the adequacy of a model is to compare its fit with a saturated model. The maximum likelihood achievable in a model with n parameters is $l_n(y, y)$. The one evaluated at the maximum likelihood fits $\hat \mu_i=g^{-1}(x_i^T\hat \beta)$
+
+- Scaled deviance generalizes the sum of squares errors used in linear regression
+
+$$
+D^*(\bold y,\hat \mu)=\sum_{i=1}^n2[l_n(y_i;y_i)-l_n(\hat \mu_i;y_i)]=\sum_{i=1}^n d_i
+$$
+
+- Pearson's Statistic
+
+$$
+P=\sum_{i=1}^n\frac{(y_i-\hat\mu_i)^2}{\phi V(\hat \mu_i)}
+$$
+
+## Survival Data
+
+- The data of interest represent the length of time until some event happens
+- Frequently survival data are note completely observed because the event of interest has not occurred at the time the data was recorded
+
+### Function
+
+- Survival function: survival function is the complement of the cdf which gives the probability of surviving at time t
+
+$$
+S(t)=P(T>t)=1-P(T\le t)=1-F(t)
+$$
+
+- Harzard function
+
+$$
+h(t)=lim_{\delta->0}\frac{P(t\le T\le t+\delta|T\ge t)}{\delta}=\frac{f(t)}{1-F(t)}=-\frac{\partial S(t)}{\partial t}
+$$
+
+### Censoring
+
+$$
+(Y_i,\delta_i)=\{min(T_i,C_i),||-_{T_i<C_i}\},i=1,2,...,n
+$$
+
+- $Y_i$ will take on the value of the event if it already happened, otherwise it will take on the value of the censoring time $C_i$.
+
+- Random censoring: We record different experiments independently at different times.
+
+$$
+(Y_i,\delta_i)=(y_i,1)\ when\ T_i=y_i,C_i>y_i\ (event\ happened)
+$$
+
+$$
+(Y_i,\delta_i)=(y_i,0)\ when\ T_i\ge y_i,C_i=y_i\ (event\ not\ happened\ yet)
+$$
+
+### Likelihood
+
+$$
+P(Y_i=y_i,\delta_i=1)=f_{\theta}(y_i)(1-G(y_i))
+$$
+
+$$
+P(Y_i=y_i,\delta_i=0)=(1-F_{\theta}(y_i))g(y_i)
+$$
+
+$$
+L(\theta;y,\delta)=\prod f_{\theta}(y_i)^{\delta_i}(1-F_{\theta}(y_i))^{1-\delta_i}
+$$
+
+$$
+\hat \theta_{ML}=argmax\sum(\delta_i\log f_{\theta}(y_i)+(1-\delta_i)\log (1-F_{\theta}(y_i)))
+$$
+
+### Kaplan-Meier Estimator
+
+$$
+\hat S(t)=\prod (1-\frac{d_i}{r_i})
+$$
+
+$$
+d_i=\sum_{j=1}^n\delta_j 1_{Y_j=t_i}(failures\ at\ t_i)
+$$
+
+$$
+r_i=\sum_{j=1}^n1_{Y_j\ge t_i}(at\ risk\ at\ t_i)
+$$
+
+### Cox Regression
+
+$$
+\lambda(t|X)=\lambda_0(t)exp(X^T\beta)
+$$
+
+$\lambda_0(t)=\lambda(t|X=0)$ is called baseline hazard function. This is a semi-parametric model because the baseline hazard function is fully non-parametric.
+$$
+\frac{\lambda(t|X=1)}{\lambda(t|X=0)}=exp(\beta)
+$$
+
+$$
+\log(\frac{\lambda(t|X_1=x_1,...,X_j=x_j+1,...,X_k=x_k)}{\lambda(t|X_1=x_1,...,X_j=x_j,...,X_k=x_k)})=\beta_j
+$$
+
+With one unit increase in $X_j$ while other covariates remain the same, the log ratio of hazard functions is $\beta_j$ times of originial log ratio of hazard function.
+
+## Nonparameteric Regression
+
+### Statistical Model
+
+$$
+Y_i=f(X_i)+\epsilon_i,i=1,2,...,n
+$$
+
+- $Y_i$: Response variable
+- $X_i$: Covariate
+- Unknown smooth regression function f
+- Noise term $\epsilon_i$, assumed to be i.i.d. and independent of $X_i$
+
+### Kernel Smoothing
+
+$$
+\hat f_h(x)=\frac{1}{nh}\sum_{i=1}^nK(\frac{x_i-x}{h})
+$$
+
+Nadaraya-Watson Estimator: a weighted average of the response variables Y within the bandwidth centered at X
+$$
+\hat f_{NW}(x)=\sum_{i=1}^n\frac{K(\frac{x-x_i}{h})y_i}{\sum_{j=1}^nK(\frac{x-x_j}{h})}
+$$
+Local Polynomials Regression: Taylor's theorem can motivate the use of local polynomial fits since it suggests that f(x) can be estimated using the observed points $x_i$
+$$
+f(x)=\beta_0+\beta_1(x-x_i)+...+(\beta_p)(x-x_i)^p
+$$
+
+$$
+\hat \beta_x=argmin(\sum_{i=1}^n(y_i-\beta_{x0}-\beta_{x1}(x-x_i)-...-\beta_{xp}(x-x_i)^p)^2K(\frac{x-x_i}{h}))
+$$
+
+$$
+\hat \beta_x=argmin((y-X_x\beta_x)^TW_x(y-X_x\beta_x))=(X_x^TW_xX_x)^{-1}X_x^TW_xy
+$$
+
+### Spline Smoothing
+
+Approximate $f(x)$ with a linear combination of known functions $b_j(x)$
+$$
+f(x)=\sum_{j=0}^K\beta_j b_j(x)
+$$
+
 
