@@ -89,7 +89,7 @@ Bottleneck link: link on end-end path that constrains end-end throughput
 
 ## Protocol Layers
 
-- Application Layer: The application layer is where network applications and their application-layer pro- tocols reside.
+- Application Layer: The application layer is where network applications and their application-layer protocols reside.
 - Transport Layer: The Internet’s transport layer transports application-layer messages between application endpoints.
 - Network Layer: The Internet’s network layer is responsible for moving network-layer packets known as **datagrams** from one host to another.
 - Link Layer: The Internet’s network layer routes a datagram through a series of routers between the source and destination.

@@ -24,8 +24,8 @@ Addressing process: To identify the receiving process, two pieces of information
 
 ### Transport Service
 
-- data integrity: One important service that a transport-layer protocol can potentially provide to an applica- tion is process-to-process reliable data transfer.
-- throughput: With such a service, the application could request a guaranteed throughput of *r* bits/sec, and the transport protocol would then ensure that the avail- able throughput is always at least *r* bits/sec.
+- data integrity: One important service that a transport-layer protocol can potentially provide to an application is process-to-process reliable data transfer.
+- throughput: With such a service, the application could request a guaranteed throughput of *r* bits/sec, and the transport protocol would then ensure that the available throughput is always at least *r* bits/sec.
 - timing: A transport-layer protocol can also provide timing guarantees.
 - Security: a transport protocol can provide an application with one or more security services.
 
@@ -47,7 +47,7 @@ Persistent HTTP:
 
 - server leaves connection open after sending response
 - subsequent HTTP messages between same client/server sent over open connection
-- Client sends requests as son as it encounters a referenced object
+- Client sends requests as soon as it encounters a referenced object
 - As little as one RTT for all the referenced objects
 
 <img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220305150629948.png" alt="image-20220305150629948" style="zoom:33%;" />
@@ -134,7 +134,7 @@ DNS: translate host name to its IP address
 
 - Host Aliasing: DNS can be invoked by an application to obtain the canonical hostname for a supplied alias hostname as well as the IP address of the host.
 - Mail Server Aliasing: DNS can be invoked by a mail application to obtain the canonical hostname for a supplied alias hostname as well as the IP address of the host.
-- Load Distribution: DNS is also used to perform load distribution among repli- cated servers, such as replicated Web servers.
+- Load Distribution: DNS is also used to perform load distribution among replicated servers, such as replicated Web servers.
 
 ### Distributed Hierarchical Database
 

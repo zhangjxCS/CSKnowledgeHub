@@ -52,7 +52,7 @@ $$
 ### Packet Scheduling
 
 - FIFO: The FIFO (also known as first-come-first-served, or FCFS) scheduling discipline selects packets for link transmission in the same order in which they arrived at the output link queue.
-- Priority Queuing: Under priority queuing, packets arriving at the output link are classified into prior- ity classes upon arrival at the queue
+- Priority Queuing: Under priority queuing, packets arriving at the output link are classified into priority classes upon arrival at the queue
 - Round Robin and Weighted Fair Queuing: Under the round robin queuing discipline, packets are sorted into classes as with priority queuing. A generalized form of round robin queuing that has been widely implemented in routers is the so-called **weighted fair queuing (WFQ) discipline**, which gets weighted amount of service in each cycle in round robin.
 
 ## Internet protocol IP
@@ -176,8 +176,6 @@ Hierarchical OSPF
 
 ### Border Gateway Protocol BGP
 
-OSPF is a link-state protocol that uses flooding of link-state information and a Dijkstra’s least-cost path algorithm. With OSPF, each router constructs a complete topological map (that is, a graph) of the entire autonomous system.
-
 - Obtain prefix reachability information from neighboring ASs.
 - Determine the “best” routes to the prefixes.
 
@@ -254,5 +252,5 @@ Network management includes the deployment, integration, and coordination of the
 
 - *Network management agent.* The network management agent is a software pro- cess running in the managed device that communicates with the managing server, taking local actions at the managed device under the command and control of the managing server.
 
-- *Network management protocol.* This protocol runs between the managing server and the managed devices, allowing the managing server to query the status of managed devices and take actions at these devices via its agents.\
+- *Network management protocol.* This protocol runs between the managing server and the managed devices, allowing the managing server to query the status of managed devices and take actions at these devices via its agents.
 

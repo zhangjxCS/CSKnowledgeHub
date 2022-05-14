@@ -32,9 +32,8 @@
 
 ### 机器学习(DA MLE)
 
-- [常用模型推导](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC.md) ([西瓜书理论推导链接](https://datawhalechina.github.io/pumpkin-book/#/))
+- [常用模型推导](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%A8%A1%E5%9E%8B%E6%8E%A8%E5%AF%BC.md) ([西瓜书理论推导链接](https://datawhalechina.github.io/pumpkin-book/#/))
 - [基础概念](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.md) ([Andrew Ng课程链接](https://www.coursera.org/learn/machine-learning))
-- [蒙特卡洛方法](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95.md)
 
 ### 深度学习(MLE)
 
@@ -64,6 +63,8 @@
 - [简介](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Introduction.md) ([UMass课程链接](http://gaia.cs.umass.edu/kurose_ross/videos/1/))
 - [应用层](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Application%20Layer.md) ([UMass课程链接](http://gaia.cs.umass.edu/kurose_ross/videos/1/))
 - [传输层](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Transport%20Layer.md) ([UMass课程链接](http://gaia.cs.umass.edu/kurose_ross/videos/1/))
+- [网络层](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Network%20Layer.md) ([UMass课程链接](http://gaia.cs.umass.edu/kurose_ross/videos/1/))
+- [数据链路层](https://github.com/zhangjx831/Data-Science-Notes/blob/master/Notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Link%20Layer.md) ([UMass课程链接](http://gaia.cs.umass.edu/kurose_ross/videos/1/))
 
 ### 数据库(DE)
 
