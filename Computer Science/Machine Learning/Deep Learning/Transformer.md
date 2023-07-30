@@ -26,13 +26,13 @@
 - 解码器RNN对上一个词的输出是query
 - 注意力输出和下一个词的输入合并作为特征
 
-<img src="https://i.loli.net/2021/11/27/pNktMSJAU3rHVf7.png" alt="image-20211126160555766" style="zoom:50%;" />
+<img src="../../../Images/pNktMSJAU3rHVf7.png" alt="image-20211126160555766" style="zoom:50%;" />
 
 ### Self-Attention
 
 给定序列，将$x_i$来当作query key value的注意力机制
 
-<img src="https://i.loli.net/2021/11/27/BiFHO5rXQyJ9CoE.png" alt="image-20211126163603865" style="zoom:50%;" />
+<img src="../../../Images/BiFHO5rXQyJ9CoE.png" alt="image-20211126163603865" style="zoom:50%;" />
 
 位置编码：自注意力并没有记录位置信息，通常使用位置编码矩阵记录位置信息
 
@@ -40,7 +40,7 @@
 
 ## Transformer
 
-<img src="https://i.loli.net/2021/11/27/UWVkO6PIpX95DA7.png" alt="image-20211126165001199" style="zoom:33%;" />
+<img src="../../../Images/UWVkO6PIpX95DA7.png" alt="image-20211126165001199" style="zoom:33%;" />
 
 ### Multi-Head Attention
 
@@ -49,7 +49,7 @@
 - 不同头的输出：$\bold h_i=f(\bold W_i^{(q)}\bold q, \bold W_i^{(k)}\bold k, \bold W_i^{(v)}\bold v)$
 - 多头注意力输出：$\bold W_o[\bold h_1, \bold h_2, ..., \bold h_h]$
 
-<img src="https://i.loli.net/2021/11/27/vlQH1xzqCYn2F3c.png" alt="image-20211126164201265" style="zoom:50%;" />
+<img src="../../../Images/vlQH1xzqCYn2F3c.png" alt="image-20211126164201265" style="zoom:50%;" />
 
 ### Masked Multi-Head Attention
 
@@ -107,13 +107,13 @@
 
 - 句子分类：将<cls>对应的向量输入到全联接层进行分类
 
-<img src="https://i.loli.net/2021/11/27/LCdpFfP8twkD6S4.png" alt="image-20211126171203016" style="zoom: 33%;" />
+<img src="../../../Images/LCdpFfP8twkD6S4.png" alt="image-20211126171203016" style="zoom: 33%;" />
 
 - 命名实体识别：将非特殊词元输入到全联接层进行分类
 
-<img src="https://i.loli.net/2021/11/27/SYNXkEyBGf6l4vW.png" alt="image-20211126171226115" style="zoom:33%;" />
+<img src="../../../Images/SYNXkEyBGf6l4vW.png" alt="image-20211126171226115" style="zoom:33%;" />
 
 - 问题回答：对片段中每个词元预测是否为回答的开始或者结束
 
-<img src="https://i.loli.net/2021/11/27/sOnM6eDqWA3QjZP.png" alt="image-20211126171239969" style="zoom:33%;" />
+<img src="../../../Images/sOnM6eDqWA3QjZP.png" alt="image-20211126171239969" style="zoom:33%;" />
 

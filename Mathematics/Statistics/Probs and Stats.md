@@ -146,7 +146,7 @@ Bayesian interpretation: the probability of an outcome is considered a statement
   - associative law: $(E\cup F)\cup G=E\cup (F\cup G)$
   - distributive law: $(E\cup F)\cap G=(E\cap G) \cup (F\cap G)$
 
-![image-20210725182157150](https://i.loli.net/2021/10/28/2CDNtEvHIomxnzf.png)
+![image-20210725182157150](../../Images/2CDNtEvHIomxnzf.png)
 
 ### Principal of Counting
 
@@ -352,7 +352,7 @@ $$
 
 The Poisson random variable may be used as an approximation for a binomial random variable with parameters (*n*, *p*) when *n* is large and *p* is small, in that case $\lambda=np$
 
-<img src="https://i.loli.net/2021/08/04/Xy32mSYOxFnrVwz.png" alt="image-20210726235942973" style="zoom:25%;" />
+<img src="../../Images/Xy32mSYOxFnrVwz.png" alt="image-20210726235942973" style="zoom:25%;" />
 
 The passion process is the events occurring at random time points, and N(t) denotes the number of events that occurs in the time interval [0, t]
 

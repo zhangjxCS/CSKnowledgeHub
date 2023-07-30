@@ -29,7 +29,7 @@ Addressing process: To identify the receiving process, two pieces of information
 - timing: A transport-layer protocol can also provide timing guarantees.
 - Security: a transport protocol can provide an application with one or more security services.
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220305124311303.png" alt="image-20220305124311303" style="zoom:50%;" />
+<img src="../../../Images/image-20220305124311303.png" alt="image-20220305124311303" style="zoom:50%;" />
 
 ## Web
 
@@ -50,7 +50,7 @@ Persistent HTTP:
 - Client sends requests as soon as it encounters a referenced object
 - As little as one RTT for all the referenced objects
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220305150629948.png" alt="image-20220305150629948" style="zoom:33%;" />
+<img src="../../../Images/image-20220305150629948.png" alt="image-20220305150629948" style="zoom:33%;" />
 
 ### HTTP Request
 
@@ -73,7 +73,7 @@ HTTP is stateless, cookies is used to keep track of users
 - At protocol endpoints: maintain state at sender/receiver over multiple transactions
 - In messages: cookies in HTTP messages carry state
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220305152405197.png" alt="image-20220305152405197" style="zoom: 33%;" />
+<img src="../../../Images/image-20220305152405197.png" alt="image-20220305152405197" style="zoom: 33%;" />
 
 ### Web caches
 
@@ -99,7 +99,7 @@ Decreased delay in multi-object HTTP requests, increased flexibility at *server*
 - push unrequested objects to client
 - divide objects into frames, schedule frames to mitigate HOL blocking
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220305153830056.png" alt="image-20220305153830056" style="zoom: 33%;" />
+<img src="../../../Images/image-20220305153830056.png" alt="image-20220305153830056" style="zoom: 33%;" />
 
 ## E-mail
 
@@ -111,7 +111,7 @@ Three major components: user agents; mail servers; simple mail transfer protocol
 - Three phases of transfer: SMTP handshake(Persistent connection), SMTP transfer of messages, SMTP closure
 - Command/response interaction
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220305161459418.png" alt="image-20220305161459418" style="zoom: 50%;" />
+<img src="../../../Images/image-20220305161459418.png" alt="image-20220305161459418" style="zoom: 50%;" />
 
 ### Mail Access Control
 
@@ -195,7 +195,7 @@ When sending chunks:
 - One peer sends chunks to those four peers currently sending her chunks at highest rate
 - Every 30 secs, ranomly select another peer, starts sending chunks
 
-<img src="/Users/shawnzhang/Library/Application Support/typora-user-images/image-20220305201150385.png" alt="image-20220305201150385" style="zoom:50%;" />
+<img src="../../../Images/image-20220305201150385.png" alt="image-20220305201150385" style="zoom:50%;" />
 
 ## Video Streaming and CDN
 
