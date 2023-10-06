@@ -11,7 +11,7 @@ Within our repository, you will find a diverse range of content, including:
 
 ## About me
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect%20with%20me-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/jingxiangzhang/)   [![Zhihu](https://img.shields.io/badge/Zhihu-Follow%20Me-blue?style=for-the-badge&logo=zhihu)](https://www.zhihu.com/people/zhangjx831)   [![Sponsor Me on Alipay](https://img.shields.io/badge/Alipay-Sponsor%20Me-blue?style=for-the-badge&logo=alipay)](https://www.your-alipay-sponsorship-link.com)   [![Consult](https://img.shields.io/badge/Zoom-Consult Me-blue?style=for-the-badge&logo=zoom)](https://calendly.com/zhangjx/30min)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect%20with%20me-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/jingxiangzhang/)   [![Zhihu](https://img.shields.io/badge/Zhihu-Follow%20Me-blue?style=for-the-badge&logo=zhihu)](https://www.zhihu.com/people/zhangjx831)   [![Sponsor Me on Alipay](https://img.shields.io/badge/Alipay-Sponsor%20Me-blue?style=for-the-badge&logo=alipay)](https://www.your-alipay-sponsorship-link.com)   [![Consult](https://img.shields.io/badge/Zoom-Consult%20Me-blue?style=for-the-badge&logo=zoom)](https://calendly.com/zhangjx/30min)
 
 I transitioned from a bachelor's degree in Environmental Engineering at Tsinghua University to a career in software engineering. I hold master's degrees in Data Science from Columbia University and Computer Science from Georgia Tech. This unique academic journey has given me valuable insights into becoming a software engineer, particularly from a non-computer science background. I excel at finding and utilizing resources effectively for continuous learning in this field.
 
