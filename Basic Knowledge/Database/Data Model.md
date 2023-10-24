@@ -1,3 +1,5 @@
+[toc]
+
 ## Extended Entity-Relationship Model
 
 ### Entity

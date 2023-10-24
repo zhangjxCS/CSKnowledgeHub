@@ -1,3 +1,5 @@
+[toc]
+
 ## Structured Query Language
 
 - Data Manipulation Language (DML): SELECT, INSERT, UPDATE, and DELETE statements.
