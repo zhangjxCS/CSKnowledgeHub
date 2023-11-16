@@ -79,6 +79,10 @@ I transitioned from a bachelor's degree in Environmental Engineering at Tsinghua
   - [VPC](Frameworks/AWS/VPC.md)
   - [Lambda](Frameworks/AWS/Lambda.md)
 
+### System Desing
+
+- [Web Application](System%20Design/Web%20Application.md)
+
 ## Studying Resources
 
 - [Alex Xu's System Design](https://bytebytego.com/)
