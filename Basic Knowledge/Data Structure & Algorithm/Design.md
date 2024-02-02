@@ -4,6 +4,60 @@
 
 ### LRU
 
+```python
+class Node:
+    def __init__(self, key=0, value=0, prev=None, next=None):
+        self.key = key
+        self.val = value
+        self.prev = prev
+        self.next = next
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.mapper = {}
+        self.head = Node()
+        self.tail = Node()
+        self.head.next = self.tail
+        self.tail.prev = self.head
+    
+    def _insert(self, node):
+        prev = self.tail.prev
+        node.prev = prev
+        prev.next = node
+        self.tail.prev = node
+        node.next = self.tail
+        self.mapper[node.key] = node
+    
+    def _remove(self, node):
+        prev, next = node.prev, node.next
+        prev.next = next
+        next.prev = prev
+        node.prev = None
+        node.next = None
+        del self.mapper[node.key]
+    
+    def get(self, key: int) -> int:
+        if key not in self.mapper:
+            return -1
+       	node = self.mapper[key]
+        self._remove(node)
+        self._insert(node)
+        return node.val
+    
+    def put(self, key: int, value: int) -> None:
+        if key in self.mapper:
+            node = self.mapper[key]
+            node.val = value
+            self._remove(node)
+            self._insert(node)
+        else:
+            if len(self.mapper) == self.capacity:
+                self._remove(self.head.next)
+            node = Node(key, value)
+            self._insert(node)
+```
+
 ### LFU
 
 ## HashTable
