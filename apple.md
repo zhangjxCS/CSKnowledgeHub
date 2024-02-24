@@ -1,0 +1,6 @@
+- 3+ years of machine learning engineering experience in feature engineering, model training, model serving, model monitoring and model refresh management.
+- Experience developing AI/ML systems at scale in production or in high-impact research environments.
+- Passionate about computer vision, natural language processing, especially in LLMs and Generative AI systems.
+- Knowledge with the common frameworks and tools such as PyPorch or TensorFlow.
+- Proven experience with transformer models such as BERT, GPT etc., and a proven understanding of their underlying principles is a plus
+- Strong coding and software engineering skills, and familiarity with software engineering principles around testing, code reviews and deployment.
