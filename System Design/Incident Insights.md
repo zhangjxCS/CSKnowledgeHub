@@ -2,6 +2,8 @@
 
 ## Requirments
 
+<img src="../Images/requirement.png" alt="requirement" style="zoom:50%;" />
+
 - **User Authentication and Account Management:**
   - Implement a secure user signup and login process.
   - Allow users to create and manage their own accounts.
@@ -67,6 +69,7 @@
 - **Data Pipeline Orchestrator:** Airbyte
 - **Monitoring:** Sentry, Pagerduty, Prometheus
 - **CI/CD:** Github Action, ArgoCD
+- **Authorization:** Auth0
 
 ## Deep Dive
 

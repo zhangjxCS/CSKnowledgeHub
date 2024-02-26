@@ -42,6 +42,23 @@
 4. **Update Weights**: Adjust the weights by a fraction (defined by the learning rate) of their gradients.
 5. **Repeat**: Perform multiple iterations of forward and backward passes with weight updates until the network's performance is satisfactory or a certain number of iterations is reached.
 
+![8.png](../../Images/U3iEf2QnpCOFqsS.png)
+$$
+E_k=\frac{1}{2}\sum_j^l(\hat y_j^k-y_j^k)^2
+$$
+
+$$
+\frac{\partial E_k}{\partial v_{ih}}=\sum_j^l\frac{\partial E_k}{\partial \hat y_j^k}\cdot \frac{\partial \hat y_j^k}{\partial \beta_j}\cdot \frac{\partial \beta_j}{\partial b_h}\cdot \frac{\partial b_h}{\partial \alpha_h}\cdot \frac{\partial \alpha_h}{\partial v_{ih}}
+$$
+
+$$
+\frac{\partial E_k}{\partial v_{ih}}=\sum_j^l(\hat y_j^k-y_j^k)\hat y_j^k(1-\hat y_j^k)w_{hj}b_h(1-b_h)x_i=\sum_j^l-g_jw_{hj}b_h(1-b_h)x_i
+$$
+
+$$
+\frac{\partial E_k}{\partial v_{ih}}=-b_h(1-b_h)\sum_j^lg_jw_{hj}x_i=-e_hx_i
+$$
+
 ### Loss Functions
 
 - Regression: Mean Squared Error (MSE) computes the average of the squares of the errors between the actual values ($y$) and the predicted values ($\hat{y}$). It's widely used in regression problems.
@@ -243,23 +260,122 @@ $$
 
 ### VGG
 
+![VGG-Net Architecture Explained. The company Visual Geometry Group… | by  Siddhesh Bangar | Medium](https://miro.medium.com/v2/resize:fit:1400/1*VPm-hHOM14OisbFUU4cL6Q.png)
+
+- **Convolutional Layers:** VGG networks use 3x3 convolutional filters with a stride of 1 pixel; this small receptive field allows capturing fine details in the image. The convolutional layers are arranged in blocks, with each block followed by a max-pooling layer for spatial downsampling.
+- **Depth:** The networks are notably deep, with VGG-16 and VGG-19 having 16 and 19 layers respectively. This depth is crucial for learning a hierarchy of features at different scales and complexities.
+- **Fully Connected Layers:** Following several blocks of convolutional and max-pooling layers, VGG networks have three fully connected layers. The first two have 4096 channels each, and the third performs classification, having as many channels as there are classes in the dataset (e.g., 1000 for ImageNet).
+- **ReLU Activation:** The ReLU (Rectified Linear Unit) activation function is applied after each convolutional layer, introducing non-linearity into the model without affecting the receptive fields of the convolution layers.
+- **Fixed Input Size:** VGG networks are trained with a fixed input size of 224x224 RGB images, which means that all images need to be resized to this dimension before being fed into the network.
+- **Pre-training:** VGG networks were pre-trained on the ImageNet dataset, which contains over a million images categorized into 1000 classes. This pre-training helps in transferring learned features to other visual recognition tasks with less data.
+
 ### ResNet
+
+<img src="https://miro.medium.com/v2/resize:fit:850/1*C8jf92MeHZnxnbpMkz6jkQ.png" alt="Resnet Architecture Explained. In their 2015 publication “Deep… | by  Siddhesh Bangar | Medium"  />
+
+- **Residual Blocks:** The core idea behind ResNet is its use of residual blocks. These blocks have a shortcut connection that skips one or more layers and performs identity mapping, adding the input of the block to its output. This design encourages the network to learn residual functions with reference to the layer inputs, making it easier to train deeper networks.
+- **Deep Architectures:** ResNet architectures come in various depths, with ResNet-18, ResNet-34, ResNet-50, ResNet-101, and ResNet-152 being some of the most popular configurations. The number denotes the total layers in the architecture. The deeper versions of ResNet, like ResNet-50 and beyond, use "bottleneck" layers with 1x1, 3x3, and 1x1 convolutional layers in their residual blocks to increase depth without a significant increase in computational complexity.
+- **Batch Normalization:** ResNet applies batch normalization after every convolutional layer. This technique normalizes the output of a previous activation layer by subtracting the batch mean and dividing by the batch standard deviation, which helps in speeding up training and reduces the sensitivity to network initialization.
+- **Global Average Pooling:** Instead of using fully connected layers at the end of the network, ResNet employs global average pooling to reduce the dimensions of the feature maps to the number of classes, which significantly decreases the number of parameters and helps to prevent overfitting.
 
 ## Recurrent Neural Networks
 
-### Architecture
+### RNN
 
-### GRU
+<img src="https://miro.medium.com/v2/resize:fit:1400/1*HgAY1lLMYSANqtgTgwWeXQ.png" alt="Introduction to the Architecture of Recurrent Neural Networks (RNNs) | by  Manish Nayak | Towards AI" style="zoom:50%;" />
+
+- **Sequence Processing:** Unlike feedforward neural networks, RNNs are designed to work with sequences of data, where the order and context of the input elements are crucial for making accurate predictions or generating outputs.
+- **Shared Weights:** In an RNN, the same weights are applied across all time steps during the forward and backward passes, which significantly reduces the number of parameters that need to be learned, regardless of the sequence length.
+- **Memory:** RNNs have a form of memory that captures information about what has been calculated so far. The output at each time step depends not just on the current input but also on a hidden state, which represents the information learned from prior inputs.
+- **Variable Length Inputs and Outputs:** RNNs can handle inputs and outputs of varying lengths, making them versatile for a wide range of tasks such as generating variable-length text or processing audio clips of different durations.
 
 ### LSTM
 
+<img src="https://miro.medium.com/v2/resize:fit:1400/1*yBXV9o5q7L_CvY7quJt3WQ.png" alt="Illustrated Guide to LSTM's and GRU's: A step by step explanation | by  Michael Phi | Towards Data Science" style="zoom: 50%;" />
+
+- **Forget Gate:** Decides what information is irrelevant and should be thrown away from the cell state.
+
+$$
+f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+$$
+
+- **Input Gate:** Updates the cell state with new information from the current input.
+
+$$
+i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+$$
+
+$$
+\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+$$
+
+- **Cell State: **
+
+$$
+C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
+$$
+
+- **Output Gate:** Determines what the next hidden state should be, which is used for predictions and passed to the next time step.
+
+$$
+o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+$$
+
+$$
+h_t = o_t * \tanh(C_t)
+$$
+
+### GRU
+
+- **Update Gate:** Helps the model to determine the extent to which the new state is just the old state and to what extent the new state is influenced by the current input.
+
+$$
+z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
+$$
+
+- **Reset Gate:** Allows the model to decide how much of the past information to forget.
+
+$$
+r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)
+$$
+
+- **Hidden State:**
+
+$$
+\tilde{h}_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b)
+$$
+
+$$
+h_t = (1 - z_t) * h_{t-1} + z_t * \tilde{h}_t
+$$
+
 ### Sequence to Sequence
+
+<img src="https://miro.medium.com/v2/resize:fit:1400/1*Ismhi-muID5ooWf3ZIQFFg.png" alt="Sequence to sequence model: Introduction and concepts | by Manish Chablani  | Towards Data Science" style="zoom:50%;" />
+
+- Encoder: The encoder processes the input sequence one element at a time and transforms it into a fixed-sized context vector. Decoder
+
+- Decoder: The decoder is tasked with generating the output sequence, element by element, using the context vector as its initial state. It is also typically an RNN that is trained to predict the next element of the output sequence, given the previous elements and the context vector.
 
 ## Generative Models
 
 ### VAE
 
+<img src="https://lilianweng.github.io/posts/2018-08-12-vae/vae-gaussian.png" alt="From Autoencoder to Beta-VAE | Lil'Log" style="zoom:50%;" />
+
+- **Encoding:** The encoder part of a VAE takes an input *x* and encodes it into a latent representation z*. However, instead of encoding x to a single point, the encoder outputs parameters (mean *μ* and variance 2*σ*2) of a probability distribution in the latent space.
+- **Sampling:** A point z* is sampled from the distribution defined by μ* and 2*σ*2. This sampling introduces randomness into the model, which is crucial for the generative process.
+- **Decoding:** The decoder takes the sampled latent point z* and tries to reconstruct the original input *x*.
+- **Loss Function:** The loss function of a VAE is composed of two terms: a reconstruction loss (e.g., Mean Squared Error) that forces the decoded samples to match the original inputs, and a regularization term (Kullback-Leibler divergence) that pushes the latent space distributions to be as close as possible to a prior distribution, typically a standard normal distribution.
+
 ### GAN
 
-### Autoencoders
+- **Generator:** The generator network takes random noise as input and generates data (like images) that resemble the training data. The goal of the generator is to produce data so realistic that the discriminator cannot distinguish it from real data.
+- **Discriminator:** The discriminator network takes real data from the training set and fake data from the generator as input and tries to classify them as real or fake. Its goal is to accurately identify whether the input data is coming from the training dataset or was created by the generator.
+
+- **Training: **The training of GANs involves a competitive process where the generator and discriminator are trained simultaneously. The generator aims to maximize the probability of the discriminator making a mistake, while the discriminator aims to minimize this probability. This process can be described as a min-max game with the following objective function:
+
+$$
+\min_{G} \max_{D} V(D, G) = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_{z}(z)}[\log(1 - D(G(z)))]
+$$
 

@@ -465,7 +465,7 @@ def topological_sort(graph):
     def helper(v, visited, stack):
         visited.add(v)
         for neighbor in graph[v]:
-            if neighbor not in visited:  # Fix the typo in "neighbor"
+            if neighbor not in visited:
                 helper(neighbor, visited, stack)
         stack.append(v)
 
