@@ -114,19 +114,111 @@ Smoothing:
 
 ## Sequence Model
 
-### RNN
-
 ### Siamese Network
+
+![A friendly introduction to Siamese Networks | by Sean Benhur | Towards Data  Science](../../Images/1*LwOBbwGXMZUy6OzkFAPTzw.png)
+
+- **Architecture**: The core architecture of a Siamese network consists of two identical neural networks, each taking one of the two input vectors. The outputs of these networks are then fed into a metric function that computes a distance or similarity score between the inputs.
+- **Weight Sharing**: The two subnetworks share the same weights and architecture, ensuring that they process their respective inputs in the same way. This shared learning helps the network learn more efficiently and reduces the number of parameters needed, which can mitigate overfitting.
+- **Contrastive Loss**: Siamese networks often use a contrastive loss function during training. This type of loss function is designed to ensure that similar input pairs are brought closer together in the embedding space, while dissimilar pairs are pushed apart. This training approach enables the network to learn discriminative features that are effective at differentiating between inputs.
 
 ## Transformer
 
 ### Attention
 
+The attention mechanism, at its core, involves computing a set of attention weights and using them to produce a weighted sum of some values. These weights determine the amount of "attention" or importance given to each part of the input data. Below are the formulas for different types of attention mechanisms, which highlight their distinct approaches to calculating these attention weights and the resulting context or output vectors.
+
+**Soft Attention**:
+$$
+F(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V
+$$
+In this formula, $Q$, $K$, and $V$ stand for Query, Key, and Value matrices, respectively, and $d_k$ is the dimensionality of the keys. This type of attention allows for a distribution of focus across all positions with a gradient that is easily computable.
+
+**Self-Attention (Intra-Attention)**:
+
+Self-attention allows the model to attend to different positions of the same input sequence. The formula is similar to the soft attention mechanism but applied within a single sequence.
+$$
+F(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V
+$$
+Here, $Q$, $K$, and $V$ are derived from the same input sequence but transformed through different weight matrices.
+
+**Multi-Head Attention**:
+
+Multi-head attention runs the attention mechanism multiple times in parallel. The outputs are then concatenated and linearly transformed into the expected dimension. The formula for Multi-Head Attention is:
+$$
+F(Q,K,V)=Concat(head_1,...,head_h)W^O
+$$
+
+$$
+head_i=A(QW_i^Q,KW_i^K,VW_i^V)
+$$
+
+In this setup, $W_i^Q$, $W_i^K$, $W_i^V$, and $W^O$ are parameter matrices, and $h$ is the number of heads.
+
 ### Transformer
+
+- **Encoder**: The encoder maps an input sequence of symbol representations (words, for instance) to a sequence of continuous representations. The Transformer encoder consists of a stack of identical layers, each with two main sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network.
+- **Decoder**: The decoder is responsible for transforming the encoder's output into the final output sequence. Like the encoder, the decoder is composed of a stack of identical layers. However, in addition to the two sub-layers found in the encoder layers, each decoder layer has a third sub-layer that performs multi-head attention over the encoder's output. This setup enables the decoder to focus on appropriate parts of the input sequence when producing the output.
+
+<img src="../../Images/attention_research_1.png" alt="The Transformer Model - MachineLearningMastery.com" style="zoom: 33%;" />
+
+- **Self-Attention**: This mechanism allows the model to weigh the importance of different words in the input sequence relative to each other. It's a crucial component for understanding the context and relationships between words in a sentence.
+- **Multi-Head Attention**: By splitting the attention mechanism into multiple "heads," the model can simultaneously attend to information from different representation subspaces at different positions. This approach increases the model's ability to focus on various aspects of the context.
+- **Positional Encoding**: Since the Transformer does not inherently process sequences in order (like RNNs or LSTMs), it uses positional encodings to give the model information about the position of each word in the sequence.
 
 ### BERT
 
+![img](../../Images/BERT.png)
+
+- **Bidirectional Training**: Unlike previous models that processed text either from left to right or combined both left-to-right and right-to-left training, BERT is designed to read text in both directions simultaneously. This bidirectionality allows the model to understand the context of a word based on all of its surroundings (both left and right of the word).
+- **Transformer Architecture**: BERT is based on the Transformer architecture, specifically utilizing its encoder mechanism. The Transformer model's ability to process words in relation to all other words in a sentence simultaneously allows BERT to capture the nuanced context of each word very effectively.
+- **Pre-training and Fine-tuning**: BERT's approach involves two stages. In the pre-training phase, the model is trained on a large corpus of text with two unsupervised tasks: masked language modeling (MLM) and next sentence prediction (NSP). In the MLM task, some percentage of the input tokens are randomly masked, and the model needs to predict their original value. In the NSP task, the model learns to predict whether two sentences are consecutive. After pre-training, BERT can be fine-tuned with additional output layers to perform a wide variety of specific NLP tasks.
+
 ### GPT
+
+- **Transformer Architecture**: At the heart of GPT is the Transformer architecture, which relies primarily on self-attention mechanisms to process input data. Unlike BERT, which uses the Transformer's encoder mechanism, GPT models utilize the Transformer's decoder for generating text. This design enables GPT to effectively predict the next word in a sequence, given all the previous words, allowing for the generation of coherent and contextually relevant text.
+- **Autoregressive Model**: GPT models are autoregressive, meaning they predict the next token in a sequence based on the tokens that precede it. This capability makes GPT particularly well-suited for tasks that involve text generation, such as content creation, storytelling, and code generation.
+- **Pre-training and Fine-tuning**: Similar to BERT, the GPT architecture involves two phases: pre-training and fine-tuning. During pre-training, the model is trained on a large corpus of text data, learning the statistical patterns of language. In the fine-tuning phase, GPT is adapted to specific tasks by training on a smaller, task-specific dataset. This approach allows the model to apply its general understanding of language to a wide range of tasks with minimal additional training.
 
 ## Prompt Engineering
 
+- Write clear instructions
+
+  - Include details in your query to get more relevant answers
+
+  - Ask the model to adopt a persona
+
+  - Use delimiters to clearly indicate distinct parts of the input
+
+  - Specify the steps required to complete a task
+
+  - Provide examples
+
+  - Specify the desired length of the output
+
+- Provide reference text
+
+  - Instruct the model to answer using a reference text
+  - Instruct the model to answer with citations from a reference text
+
+- Split complex tasks into simpler subtasks
+
+  - Use intent classification to identify the most relevant instructions for a user query
+  - For dialogue applications that require very long conversations, summarize or filter previous dialogue
+  - Summarize long documents piecewise and construct a full summary recursively
+
+- Give the model time to "think"
+
+  - Instruct the model to work out its own solution before rushing to a conclusion
+  - Use inner monologue or a sequence of queries to hide the model's reasoning process
+  - Ask the model if it missed anything on previous passes
+
+- Use external tools
+
+  - Use embeddings-based search to implement efficient knowledge retrieval
+  - Use code execution to perform more accurate calculations or call external APIs
+  - Give the model access to specific functions
+
+- Test changes systematically
+
+  - Evaluate model outputs with reference to gold-standard answers

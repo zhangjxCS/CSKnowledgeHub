@@ -1,27 +1,34 @@
-[toc]
-
 # Key-Value Store
 
-## Clarify Question
+## Requirments
 
-1. **Scale and Performance Requirements:** What is the expected scale of the key-value store in terms of data volume and number of users? What are the performance expectations in terms of latency and throughput?
-   - The key-value store should be capable of handling a large amount of data, often in the range of petabytes.
-   - It should support high throughput, allowing for thousands of operations per second.
-   - Low latency is important, especially for read operations, with the goal often being in the milliseconds.
-2. **Consistency and Availability Needs:** What level of consistency is required? Are we optimizing for strong consistency, eventual consistency, or something in between? Additionally, what are the availability requirements?
-   - The system may prioritize eventual consistency to provide better availability and partition tolerance, adhering to the CAP theorem. This means that all nodes might not have the latest data at the same time, but the system will eventually become consistent.
-   - In some scenarios, strong consistency is required, especially where critical transactional data is involved. This might come at the cost of reduced availability.
-3. **Data Model and Types:** What types of data will be stored in this key-value store? Are we dealing with simple key-value pairs, or are there more complex data structures involved?
-   - The system usually supports simple key-value pairs. The keys are unique identifiers, and the values can be blobs of data, which could be anything from simple strings or numbers to complex serialized objects.
-   - Some systems might also support more complex data types like lists, sets, or hash maps.
-4. **Persistence and Durability:** How should the data be persisted? Is durability a major concern, and if so, what are the expectations around data loss and recovery?
-   - Data should be durably stored, meaning it should not be lost in case of system failures.
-   - The system should have mechanisms for data replication across multiple nodes or data centers to ensure high availability and durability.
-   - Regular backups and a robust disaster recovery plan are also crucial.
-5. **Network and Geography Considerations:** Will the key-value store be distributed across multiple geographic locations? If so, how should the system handle network latency and partitioning issues?
-   - The system should be designed to handle network latency efficiently, especially if it's geographically distributed.
-   - It should also be resilient to network partitions, with mechanisms to handle data consistency once the partition is resolved.
-   - Data locality can be considered to reduce latency, where frequently accessed data is stored closer to the user.
+### Functional Requirments
+
+- **Basic Operations:**
+  - **Put/Insert:** Store a key-value pair in the data store. If the key already exists, update the value.
+  - **Get/Fetch:** Retrieve a value by its key. If the key does not exist, return a not found error.
+  - **Delete:** Remove a key-value pair from the store. If the key does not exist, indicate that the operation had no effect or return an error.
+- **Data Model:** Support for various data types for keys (e.g., strings, binary) and values (strings, binary, possibly more complex objects).
+- **Transaction Support:**
+  - Atomic operations for single key-value pairs.
+  - Support for transactions (optional) for operations involving multiple key-value pairs.
+- **Batch Operations:** Allow the insertion, retrieval, and deletion of multiple key-value pairs in a single operation to improve efficiency.
+- **Concurrency Control:** Handle concurrent read/write operations gracefully to ensure data integrity.
+- **TTL (Time To Live):** Optional expiration of keys after a specified duration.
+
+### Non Functional Requirments
+
+- **Performance:**
+  - High throughput for read/write operations.
+  - Low latency for key access, ideally sub-millisecond for reads and writes.
+- **Scalability:**
+  - Ability to scale out (horizontally) to support increased load.
+  - Efficient distribution of data across multiple nodes to balance load.
+- **Availability:**
+  - High availability and fault tolerance, minimizing downtime.
+  - Replication across multiple nodes to prevent data loss.
+- **Durability:** Data is not lost after being written (e.g., persisted to disk or replicated).
+- **Consistency:** Consistency model that suits the application requirements (e.g., eventual consistency, strong consistency).
 
 ## High Level Design
 

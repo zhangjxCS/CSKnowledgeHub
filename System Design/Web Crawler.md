@@ -1,128 +1,92 @@
 # Web Crawler
 
-## Clarify Questions
+## Requirments
 
-1. **Scope and Scale:** "What is the intended scope and scale of the web crawler? Are we focusing on a specific type of website or content, and how much data do we expect to process?"
-   - The crawler is intended for a broad range of websites to support a search engine index, implying a need for a highly scalable and robust system. It should be capable of handling diverse content types (text, images, videos) from various domains.
-   - The target is to process approximately 1 billion pages per month, which requires a crawler capable of handling high volumes of data efficiently.
-2. **Frequency of Crawling:** "How frequently should the web crawler revisit websites? Is there a need for real-time data, or are periodic updates sufficient?"
-   - Given the scale, the crawler will likely employ a tiered crawling strategy, with more frequent visits to rapidly changing websites and less frequent visits to static sites.
-   - A dynamic scheduling system could be used to prioritize crawling based on page importance, change frequency, and freshness requirements.
-3. **Data Storage and Processing:** "What kind of data are we looking to extract and store? Do we need to process or analyze the data in any specific way?"
-   - The crawler needs to extract and store web page content, metadata, and possibly structural data for indexing.
-   - Considering the volume, efficient storage solutions like distributed databases and content delivery networks (CDN) might be required.
-   - There should be an emphasis on preprocessing and normalizing data for ease of indexing and search.
+### Functional
+
+- **URL Fetching**: Ability to retrieve web pages by URL.
+- **Link Extraction**: Identifying and extracting links from a webpage to other pages.
+- **Content Analysis**: Capability to analyze the content of webpages to determine relevance, categorize content, or extract specific information.
+- **Robots.txt Compliance**: Respecting website crawl-delay, allow, and disallow directives to avoid overloading web servers.
+- **Duplicate Detection**: Mechanism to identify and avoid crawling the same URL multiple times.
+
+### Non-Functional
+
+- **Performance**: High efficiency in processing URLs and analyzing content, with minimal latency.
+- **Scalability**: Ability to scale horizontally to handle increases in load, potentially by adding more crawling instances.
+- **Reliability**: High uptime and robustness, with mechanisms to recover from crashes or network failures.
 
 ## High-Level Design
 
+![high-level architecture of a distributed web crawler](../Images/1*F9QnGqmAMcXEr1lQeSiqVA.png)
+
 ### Component
 
-1. **URL Frontier:**
+- **Crawler Frontend**
 
-   - **Seed URL Initialization:** Initiate the crawler with a set of seed URLs that represent a starting point.
-   - **URL Management:** Handles the addition of new URLs (from the Link Extractor) and serves as a queue for the HTML Downloader.
-   - **Duplication Check:** Integrates the "URL Seen?" component to ensure URLs aren't repeatedly processed.
+  - **Scheduler**: Determines the order in which URLs are crawled, based on prioritization algorithms (e.g., depth-first, breadth-first, or priority-based on page importance).
 
-2. **HTML Downloader:**
+  - **URL Frontier**: A queue of URLs to be visited, managed by the Scheduler. It stores URLs discovered but not yet crawled, ensuring they are unique to avoid duplicate crawling.
 
-   - **URL Fetching:** Retrieves URLs from the URL Frontier in batches for efficiency.
-   - **DNS Resolution:** Resolves IP addresses of URLs using a DNS resolver.
-   - **HTML Downloading:** Downloads the HTML content of the web pages.
+- **URL Fetcher**
 
-3. **Content Parser:**
+  - Responsible for downloading web pages. This component sends HTTP requests to the URLs in the URL Frontier and fetches the web content.
 
-   - **HTML Parsing:** Parses the downloaded HTML pages, extracting useful information.
-   - **Validation:** Checks for malformed or irrelevant content, filtering out low-quality or non-compliant pages.
+  - Must handle various HTTP methods, status codes, and also respect `robots.txt` directives.
 
-4. **Content Seen:**
+- **Link Extractor**
 
-   - **Duplication Check:** Determines if the content of a page has already been stored.
-   - **Content Filtering:** Discards duplicates to avoid redundant processing and storage.
+  - Parses the fetched web pages to extract links to other pages.
 
-5. **Link Extractor:**
+  - This module must be able to handle and normalize relative and absolute URLs, adding the new URLs back to the URL Frontier for crawling.
 
-   - **Link Extraction:** Extracts new URLs from valid HTML pages.
-   - **Link Normalization:** Ensures extracted links are in a standard format for processing.
+- **Content Processor**
 
-6. **URL Filter:**
+  - Analyzes the content of each page to extract useful information, depending on the crawler's purpose (e.g., indexing content, data extraction).
 
-   - **URL Validation:** Filters out irrelevant or low-quality URLs based on predefined criteria (e.g., domain restrictions, content type).
-   - **Relevance Assessment:** Assesses the potential value of URLs for indexing.
+  - Could include processing tasks like text extraction, keyword analysis, and metadata extraction.
 
-7. **URL Seen:**
+- **Data Storage**
 
-   - **URL Duplication Check:** Verifies if a URL is already in the storage or has been processed.
-   - **Filtering Processed URLs:** Prevents re-crawling of already processed URLs.
+  - Stores the crawled information in a structured format for easy retrieval. This could involve a database or a file system, depending on the scale and purpose of the crawler.
 
-8. **Storage and Database Integration:**
+  - Needs to be designed for efficient storage and retrieval, potentially including indexing mechanisms for quick searches.
 
-   - **Content Storage:** Stores valid, unique content from parsed HTML pages.
-   - **Metadata Storage:** Saves relevant metadata and link information.
-   - **Distributed Database System:** Ensures scalability and efficient retrieval.
+- **Duplication Detector**
 
-9. **Scalability and Performance Optimization:**
+  - Ensures that the same content or URL is not processed multiple times, saving resources and avoiding data redundancy.
 
-   - **Distributed Crawling:** Utilizes multiple crawler instances for parallel processing.
-   - **Load Balancing:** Distributes tasks evenly across crawler nodes.
-   - **Efficient Resource Utilization:** Optimizes bandwidth and computational resources.
+  - Often implemented using a fast lookup data structure, such as a hash table or Bloom filter.
 
 ### Workflow
 
-<img src="../Images/image-20231205151057529.png" alt="image-20231205151057529" style="zoom:33%;" />
-
-1. Add seed URLs to the URL Frontier
-2. HTML Downloader fetches a list of URLs from URL Frontier.
-3. HTML Downloader gets IP addresses of URLs from DNS resolver and starts downloading.
-4. Content Parser parses HTML pages and checks if pages are malformed.
-5. After content is parsed and validated, it is passed to the “Content Seen?” component. Step 6: “Content Seen” component checks if a HTML page is already in the storage.
-   - If it is in the storage, this means the same content in a different URL has already been processed. In this case, the HTML page is discarded.
-   - If it is not in the storage, the system has not processed the same content before. The content is passed to Link Extractor.
-
-6. Link extractor extracts links from HTML pages.
-7. Extracted links are passed to the URL filter.
-8. After links are filtered, they are passed to the “URL Seen?” component.
-9. “URL Seen” component checks if a URL is already in the storage, if yes, it is processed before, and nothing needs to be done.
-10. If a URL has not been processed before, it is added to the URL Frontier.
+1. The URL Frontier sends URLs to the URL Fetcher.
+2. The URL Fetcher retrieves the content and passes it to the Link Extractor and Content Processor.
+3. New URLs from the Link Extractor are filtered by the Duplication Detector and added back to the URL Frontier if unique.
+4. Processed content from the Content Processor is stored in the Data Storage system.
 
 ## Deep Dive
 
 ### URL Frontier
 
-<img src="../Images/image-20231206131354092.png" alt="image-20231206131354092" style="zoom: 50%;" />
+- **Partitioning**: The URL frontier should be partitioned across multiple machines to balance the load. Partitioning can be based on URL domain, hash, or other criteria to ensure efficient distribution and minimize bottlenecks.
+- **High Availability and Redundancy**: Implement redundancy and data replication strategies to prevent data loss and ensure the URL frontier is always available.
+- **Central Coordinator**: A central system or service (like Apache ZooKeeper) that manages the distribution of tasks and coordination between different components of the crawler. It ensures that there are no conflicts and helps in managing the crawler state across the cluster.
+- **Task Queue Management**: Use distributed queues (e.g., Apache Kafka, RabbitMQ) to manage URLs to be crawled. These queues serve as the URL Frontier, distributing crawl tasks across multiple crawling instances.
 
-1. **Function of URL Frontier:** It's a data structure that stores URLs to be downloaded, playing a crucial role in managing politeness, URL prioritization, and ensuring the freshness of the content.
+### Schema
 
-2. **Politeness:**
-   - A web crawler should avoid overwhelming a server with requests, which could be perceived as impolite or a denial-of-service (DoS) attack.
-   - The design includes a mapping from website hostnames to download threads, with each thread managing a separate FIFO (First In, First Out) queue for a specific host. This setup controls the request rate to each server.
-   - Key components for politeness include a queue router, mapping table, FIFO queues, queue selector, and worker threads. A delay between download tasks can be implemented to further enforce politeness.
+URLs Table/Collections: This table stores information about each URL that needs to be or has been crawled.
 
-3. **Priority:**
-   - URLs are prioritized based on factors like PageRank, website traffic, and update frequency.
-   - The 'Prioritizer' component computes priorities for URLs.
-   - The system includes multiple queues with assigned priorities, and the queue selector chooses queues for download, favoring higher-priority queues.
+- **URL_ID**: A unique identifier for each URL. This could be a hash of the URL.
+- **URL**: The actual URL string.
+- **Status**: Indicates the crawl status (e.g., pending, in-progress, completed, failed).
+- **Priority**: A numerical value indicating the crawl priority of the URL. Higher values indicate higher priority.
+- **Last_Crawled**: Timestamp of when the URL was last crawled.
+- **Crawl_Frequency**: Indicates how frequently the URL should be recrawled.
+- **Robots_Txt**: Cached `robots.txt` rules for the domain, to avoid fetching it before each crawl.
+- **Hash_Content**: A hash of the last crawled content, used for detecting changes in the content.
+- **Retry_Count**: Number of times the crawl was retried due to failures.
 
-4. **Freshness:**
-   - To maintain up-to-date data, the system periodically recrawls pages, with strategies to optimize this process.
-   - These strategies include recrawling based on web pages’ update history and prioritizing important pages for more frequent updates.
+Content Table/Collections: NoSQL key-value store
 
-5. **Storage for URL Frontier:**
-   - Due to the vast number of URLs (potentially in the hundreds of millions), a hybrid storage approach is adopted.
-   - Most URLs are stored on disk for scalability, with buffers in memory for efficient enqueue/dequeue operations. Data in the buffer is periodically written to disk to balance between speed and storage capacity.
-
-### HTML Downloader
-
-1. **Robots Exclusion Protocol (Robots.txt):**
-   - This is a standard used by websites to instruct crawlers on which pages can be downloaded.
-   - Crawlers must first check a website's robots.txt file and adhere to its rules before crawling.
-   - To improve efficiency, the results of the robots.txt file are cached and periodically updated.
-2. **Performance Optimization:**
-   - The HTML downloader incorporates several strategies to enhance performance:
-     - **Distributed Crawling:** The crawling process is distributed across multiple servers, with each server running multiple threads. The URL space is partitioned, and each downloader handles a subset of URLs.
-     - **DNS Resolver Caching:** DNS lookups can be a bottleneck due to their synchronous nature and varying response times. By maintaining a DNS cache that stores domain-to-IP mappings, frequent DNS calls are reduced, speeding up the process. This cache is regularly updated.
-     - **Geographical Locality:** Placing crawl servers geographically closer to website hosts can significantly decrease download times. This principle of locality is applied to various system components like servers, cache, queues, and storage.
-     - **Short Timeout:** To avoid delays from slow or unresponsive servers, a maximum wait time is defined. If a host doesn't respond within this period, the crawler moves on to other pages.
-
-## Summary
-
-The web crawler design is tailored for indexing 1 billion pages monthly for a search engine. It includes a URL Frontier for managing and prioritizing URLs, an HTML Downloader for retrieving web content while adhering to robots.txt rules, and a content parsing system for data validation. The design emphasizes scalability, performance optimization, and compliance with ethical crawling guidelines. This ensures efficient operation, up-to-date content indexing, and respect for website policies.
